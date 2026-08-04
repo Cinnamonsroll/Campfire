@@ -1,9 +1,9 @@
 import { SlashCommandBuilder } from "discord.js";
-import { buildClaimRow } from "../discord/components/daily/buildDailyComponents";
-import { dailyQuestsEmbed } from "../embeds";
-import { getDailyQuests } from "../game/services/dailyQuestService";
-import { hasCharacter } from "../guards";
-import { Command } from "../types";
+import { buildClaimRow } from "../discord/components/daily/buildDailyComponents.js";
+import { dailyQuestsEmbed } from "../embeds/index.js";
+import { getDailyQuests } from "../game/services/dailyQuestService.js";
+import { hasCharacter } from "../guards/index.js";
+import { Command } from "../types/index.js";
 
 
 const command: Command = {
