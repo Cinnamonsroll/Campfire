@@ -67,6 +67,10 @@ async function main(): Promise<void> {
       join(__dirname, "images", "assets", "fonts", "SegoeUI.ttf"),
       "Segoe UI",
     );
+    GlobalFonts.registerFromPath(
+      join(__dirname, "images", "assets", "fonts", "SegoeUIBold.ttf"),
+      "Segoe UI",
+    );
     logger.info("Registering global slash commands");
     await rest.put(Routes.applicationCommands(env.CLIENT_ID), {
       body: commands.map((cmd) => cmd.data.toJSON()),
