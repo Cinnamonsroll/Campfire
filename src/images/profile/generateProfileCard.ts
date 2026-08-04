@@ -1,10 +1,10 @@
 import { createCanvas } from "@napi-rs/canvas";
-import type { CardData } from "#/images/types/index.js";
+import type { CardData } from "#src/images/types/index.js";
 import {
   darken,
   extractHeaderColor,
   rgbString,
-} from "#/images/shared/colors.js";
+} from "#src/images/shared/colors.js";
 import {
   roundRect,
   drawAvatar,
@@ -15,10 +15,10 @@ import {
   drawRemainingXP,
   drawInventorySlot,
   drawEmptySlot,
-} from "#/images/shared/canvas.js";
-import { prefetchEmojis } from "#/images/shared/emoji.js";
-import { SCALE, COLORS, withAlpha } from "#/images/shared/layout.js";
-import { font } from "#/images/shared/typography.js";
+} from "#src/images/shared/canvas.js";
+import { prefetchEmojis } from "#src/images/shared/emoji.js";
+import { SCALE, COLORS, withAlpha } from "#src/images/shared/layout.js";
+import { font } from "#src/images/shared/typography.js";
 
 const CARD_WIDTH = 640 * SCALE;
 const LEFT_PANEL_WIDTH = 220 * SCALE;

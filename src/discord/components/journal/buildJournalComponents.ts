@@ -8,8 +8,8 @@ import {
   type APIMessageTopLevelComponent,
   type JSONEncodable,
 } from "discord.js";
-import { IS_COMPONENTS_V2 } from "#/discord/constants.js";
-import { CAMPFIRE_ORANGE } from "#/embeds/base.js";
+import { IS_COMPONENTS_V2 } from "#src/discord/constants.js";
+import { CAMPFIRE_ORANGE } from "#src/embeds/base.js";
 import {
   formatEmptyJournal,
   formatJournalCategoryHeader,
@@ -20,7 +20,7 @@ import {
   type JournalEntry,
   type JournalFilter,
   type JournalFilterOption,
-} from "#/game/services/journal/index.js";
+} from "#src/game/services/journal/index.js";
 import { FILTER_SELECT_CUSTOM_ID } from "./journalState.js";
 import type {
   FilledJournalRenderModel,

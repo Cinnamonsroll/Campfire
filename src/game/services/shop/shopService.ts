@@ -1,13 +1,13 @@
-import { pool } from "#/database/client.js";
-import type { Db } from "#/database/db.js";
-import type { Player } from "#/database/repositories/playerRepository.js";
-import { findByPlayerIdAndDate } from "#/database/repositories/shopRepository.js";
-import { secondsUntilTomorrow } from "#/game/utils/date.js";
+import { pool } from "#src/database/client.js";
+import type { Db } from "#src/database/db.js";
+import type { Player } from "#src/database/repositories/playerRepository.js";
+import { findByPlayerIdAndDate } from "#src/database/repositories/shopRepository.js";
+import { secondsUntilTomorrow } from "#src/game/utils/date.js";
 import {
   generateShop,
   type ShopEntry,
-} from "#/game/services/shop/shopGenerator.js";
-import type { ShopCardData } from "#/images/types/index.js";
+} from "#src/game/services/shop/shopGenerator.js";
+import type { ShopCardData } from "#src/images/types/index.js";
 
 export interface ShopItemView {
   entry: ShopEntry;

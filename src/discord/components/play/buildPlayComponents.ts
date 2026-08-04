@@ -8,15 +8,15 @@ import {
   type APIMessageTopLevelComponent,
   type JSONEncodable,
 } from "discord.js";
-import { IS_COMPONENTS_V2 } from "#/discord/constants.js";
-import { PLAY_LOCATION_SELECT_ID } from "#/discord/customIds.js";
-import { CAMPFIRE_ORANGE } from "#/embeds/base.js";
-import { rewardLines } from "#/game/rewards/format.js";
-import { getTitle } from "#/game/utils/titles.js";
-import { getUnlockedLocations } from "#/game/services/locationService.js";
-import type { LocationDefinition } from "#/game/types.js";
-import type { AdventureResult } from "#/game/services/adventureService.js";
-import { markup } from "#/utils/markup.js";
+import { IS_COMPONENTS_V2 } from "#src/discord/constants.js";
+import { PLAY_LOCATION_SELECT_ID } from "#src/discord/customIds.js";
+import { CAMPFIRE_ORANGE } from "#src/embeds/base.js";
+import { rewardLines } from "#src/game/rewards/format.js";
+import { getTitle } from "#src/game/utils/titles.js";
+import { getUnlockedLocations } from "#src/game/services/locationService.js";
+import type { LocationDefinition } from "#src/game/types.js";
+import type { AdventureResult } from "#src/game/services/adventureService.js";
+import { markup } from "#src/utils/markup.js";
 
 const MIN_PLAY_ENERGY = 10;
 const MAX_LINES_PER_TEXT_DISPLAY = 15;

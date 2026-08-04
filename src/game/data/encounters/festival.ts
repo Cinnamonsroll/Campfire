@@ -1,4 +1,4 @@
-import type { EncounterDefinition } from "#/game/types.js";
+import type { EncounterDefinition } from "#src/game/types.js";
 
 export const FESTIVAL_ENCOUNTERS: EncounterDefinition[] = [
   {

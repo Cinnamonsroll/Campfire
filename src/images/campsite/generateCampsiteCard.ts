@@ -1,15 +1,15 @@
 import { createCanvas, type SKRSContext2D } from "@napi-rs/canvas";
-import { drawBuildingCard } from "#/images/campsite/drawBuildingCard.js";
-import { drawStatCard } from "#/images/campsite/drawStatCard.js";
-import { fillRoundRect } from "#/images/shared/canvas.js";
-import { drawEmoji } from "#/images/shared/emoji.js";
-import { SCALE, COLORS } from "#/images/shared/layout.js";
-import { font } from "#/images/shared/typography.js";
+import { drawBuildingCard } from "#src/images/campsite/drawBuildingCard.js";
+import { drawStatCard } from "#src/images/campsite/drawStatCard.js";
+import { fillRoundRect } from "#src/images/shared/canvas.js";
+import { drawEmoji } from "#src/images/shared/emoji.js";
+import { SCALE, COLORS } from "#src/images/shared/layout.js";
+import { font } from "#src/images/shared/typography.js";
 import type {
   CampsiteCardData,
   UpgradeCardData,
-} from "#/images/types/index.js";
-import { CAMP_NAME } from "#/game/services/campService.js";
+} from "#src/images/types/index.js";
+import { CAMP_NAME } from "#src/game/services/campService.js";
 
 const CAMP_WIDTH = 520 * SCALE;
 const CAMP_HEIGHT = 492 * SCALE;

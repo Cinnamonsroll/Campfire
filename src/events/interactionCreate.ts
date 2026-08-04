@@ -4,12 +4,12 @@ import {
   type Interaction,
   type InteractionReplyOptions,
 } from "discord.js";
-import type { Event } from "#/types/index.js";
-import { runGuards, type CommandContext } from "#/guards/index.js";
-import { checkPermissions } from "#/utils/permissions.js";
-import { energyRestoredEmbed, errorEmbed } from "#/embeds/index.js";
-import { tryPassiveRestore } from "#/game/services/shop/index.js";
-import { logger } from "#/utils/logger.js";
+import type { Event } from "#src/types/index.js";
+import { runGuards, type CommandContext } from "#src/guards/index.js";
+import { checkPermissions } from "#src/utils/permissions.js";
+import { energyRestoredEmbed, errorEmbed } from "#src/embeds/index.js";
+import { tryPassiveRestore } from "#src/game/services/shop/index.js";
+import { logger } from "#src/utils/logger.js";
 
 async function replyError(
   interaction: Interaction,

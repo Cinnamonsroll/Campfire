@@ -1,10 +1,10 @@
 import { MessageFlags, SlashCommandBuilder } from "discord.js";
-import type { Command } from "#/types/index.js";
-import { campfireEmbed, errorEmbed } from "#/embeds/index.js";
-import { findByDiscordId } from "#/database/repositories/playerRepository.js";
-import { generateStatisticsCard } from "#/images/index.js";
-import { getStatistics } from "#/game/services/statsService.js";
-import { logger } from "#/utils/logger.js";
+import type { Command } from "#src/types/index.js";
+import { campfireEmbed, errorEmbed } from "#src/embeds/index.js";
+import { findByDiscordId } from "#src/database/repositories/playerRepository.js";
+import { generateStatisticsCard } from "#src/images/index.js";
+import { getStatistics } from "#src/game/services/statsService.js";
+import { logger } from "#src/utils/logger.js";
 
 const command: Command = {
   data: new SlashCommandBuilder()

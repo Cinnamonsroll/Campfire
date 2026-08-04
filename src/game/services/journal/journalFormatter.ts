@@ -1,5 +1,5 @@
-import type { ItemRarity } from "#/game/types.js";
-import { markup } from "#/utils/markup.js";
+import type { ItemRarity } from "#src/game/types.js";
+import { markup } from "#src/utils/markup.js";
 import type { JournalCategoryView, JournalEntry } from "./journalService.js";
 
 const RARITY_TAG: Record<ItemRarity, string> = {

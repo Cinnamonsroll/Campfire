@@ -1,4 +1,4 @@
-import type { ItemRarity } from "#/game/types.js";
+import type { ItemRarity } from "#src/game/types.js";
 
 export interface InventorySlot {
   emoji: string;

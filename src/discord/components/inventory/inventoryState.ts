@@ -1,4 +1,4 @@
-import { encodeComponentState } from "#/discord/components/componentState.js";
+import { encodeComponentState } from "#src/discord/components/componentState.js";
 
 const INVENTORY_NAMESPACE = "inventory";
 

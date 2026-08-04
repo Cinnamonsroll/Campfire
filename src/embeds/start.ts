@@ -1,8 +1,8 @@
 import { EmbedBuilder } from "discord.js";
 import { campfireEmbed } from "./base.js";
-import { LOCATIONS } from "#/game/data/locations.js";
-import { markup } from "#/utils/markup.js";
-import type { ItemDefinition } from "#/game/types.js";
+import { LOCATIONS } from "#src/game/data/locations.js";
+import { markup } from "#src/utils/markup.js";
+import type { ItemDefinition } from "#src/game/types.js";
 
 export function welcomeIntro(): EmbedBuilder {
   return campfireEmbed()

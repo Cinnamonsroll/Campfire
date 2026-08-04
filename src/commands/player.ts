@@ -1,14 +1,14 @@
 import { MessageFlags, SlashCommandBuilder } from "discord.js";
-import type { Command } from "#/types/index.js";
-import { logger } from "#/utils/logger.js";
-import { findByDiscordId } from "#/database/repositories/playerRepository.js";
-import { findByPlayerId } from "#/database/repositories/inventoryRepository.js";
-import { findByIds } from "#/database/repositories/itemRepository.js";
-import { ITEMS } from "#/game/data/items.js";
-import { generateCamperCard } from "#/images/index.js";
-import { campfireEmbed, errorEmbed } from "#/embeds/index.js";
-import { getTitle } from "#/game/utils/titles.js";
-import { xpToNextLevel } from "#/game/utils/xp.js";
+import type { Command } from "#src/types/index.js";
+import { logger } from "#src/utils/logger.js";
+import { findByDiscordId } from "#src/database/repositories/playerRepository.js";
+import { findByPlayerId } from "#src/database/repositories/inventoryRepository.js";
+import { findByIds } from "#src/database/repositories/itemRepository.js";
+import { ITEMS } from "#src/game/data/items.js";
+import { generateCamperCard } from "#src/images/index.js";
+import { campfireEmbed, errorEmbed } from "#src/embeds/index.js";
+import { getTitle } from "#src/game/utils/titles.js";
+import { xpToNextLevel } from "#src/game/utils/xp.js";
 
 const command: Command = {
   data: new SlashCommandBuilder()

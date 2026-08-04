@@ -1,27 +1,27 @@
-import type { StringSelectMenuHandler } from "#/types/index.js";
-import { CAMP_UPGRADE_SELECT_ID } from "#/discord/customIds.js";
+import type { StringSelectMenuHandler } from "#src/types/index.js";
+import { CAMP_UPGRADE_SELECT_ID } from "#src/discord/customIds.js";
 import {
   buildCampsiteNoticePayload,
   buildUpgradeErrorContainer,
   buildUpgradeResultContainer,
   campsitePayload,
-} from "#/discord/components/camp/buildCampComponents.js";
-import { generateCampsiteCard } from "#/images/index.js";
-import { findByDiscordId } from "#/database/repositories/playerRepository.js";
-import type { Player } from "#/database/repositories/playerRepository.js";
-import type { PlayerCamp } from "#/database/repositories/campRepository.js";
-import { getCampsite } from "#/game/services/campService.js";
+} from "#src/discord/components/camp/buildCampComponents.js";
+import { generateCampsiteCard } from "#src/images/index.js";
+import { findByDiscordId } from "#src/database/repositories/playerRepository.js";
+import type { Player } from "#src/database/repositories/playerRepository.js";
+import type { PlayerCamp } from "#src/database/repositories/campRepository.js";
+import { getCampsite } from "#src/game/services/campService.js";
 import {
   getCampRow,
   performUpgrade,
   UpgradeError,
   type UpgradeResult,
-} from "#/game/services/upgradeService.js";
-import { evaluateAndAwardAchievements } from "#/game/services/progressionService.js";
-import { withTransaction } from "#/database/transaction.js";
-import { assertMessageAuthor } from "#/utils/interactionAuthor.js";
-import { logger } from "#/utils/logger.js";
-import type { AchievementDefinition, CampBuildingKey } from "#/game/types.js";
+} from "#src/game/services/upgradeService.js";
+import { evaluateAndAwardAchievements } from "#src/game/services/progressionService.js";
+import { withTransaction } from "#src/database/transaction.js";
+import { assertMessageAuthor } from "#src/utils/interactionAuthor.js";
+import { logger } from "#src/utils/logger.js";
+import type { AchievementDefinition, CampBuildingKey } from "#src/game/types.js";
 
 interface UpgradeOutcome {
   result: UpgradeResult;

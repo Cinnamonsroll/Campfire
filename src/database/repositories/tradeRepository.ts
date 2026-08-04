@@ -1,5 +1,5 @@
-import { pool } from "#/database/client.js";
-import type { Db } from "#/database/db.js";
+import { pool } from "#src/database/client.js";
+import type { Db } from "#src/database/db.js";
 
 export type TradeStatus =
   "pending" | "accepted" | "declined" | "cancelled" | "completed";

@@ -10,22 +10,22 @@ import {
   type APIMessageTopLevelComponent,
   type JSONEncodable,
 } from "discord.js";
-import { IS_COMPONENTS_V2 } from "#/discord/constants.js";
-import { CAMP_UPGRADE_SELECT_ID } from "#/discord/customIds.js";
-import { CAMPFIRE_ORANGE, CAMPFIRE_RED } from "#/embeds/base.js";
-import { CAMP_UPGRADES } from "#/game/data/campUpgrades.js";
-import { ITEMS } from "#/game/data/items.js";
-import type { PlayerCamp } from "#/database/repositories/campRepository.js";
+import { IS_COMPONENTS_V2 } from "#src/discord/constants.js";
+import { CAMP_UPGRADE_SELECT_ID } from "#src/discord/customIds.js";
+import { CAMPFIRE_ORANGE, CAMPFIRE_RED } from "#src/embeds/base.js";
+import { CAMP_UPGRADES } from "#src/game/data/campUpgrades.js";
+import { ITEMS } from "#src/game/data/items.js";
+import type { PlayerCamp } from "#src/database/repositories/campRepository.js";
 import {
   formatUpgradeCost,
   getBuildingLevel,
-} from "#/game/services/campService.js";
+} from "#src/game/services/campService.js";
 import {
   type UpgradeError,
   type UpgradeResult,
-} from "#/game/services/upgradeService.js";
-import type { AchievementDefinition } from "#/game/types.js";
-import { markup } from "#/utils/markup.js";
+} from "#src/game/services/upgradeService.js";
+import type { AchievementDefinition } from "#src/game/types.js";
+import { markup } from "#src/utils/markup.js";
 
 const CAMP_CARD_ATTACHMENT = "attachment://campsite_card.png";
 

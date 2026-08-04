@@ -1,4 +1,4 @@
-import type { QuestDefinition } from "#/game/types.js";
+import type { QuestDefinition } from "#src/game/types.js";
 
 export const QUESTS: Record<string, QuestDefinition> = {
   gather_seashells: {

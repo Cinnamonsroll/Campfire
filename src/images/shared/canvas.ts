@@ -1,7 +1,7 @@
 import { loadImage, type SKRSContext2D } from "@napi-rs/canvas";
-import { drawEmoji } from "#/images/shared/emoji.js";
-import { SCALE, COLORS, withAlpha } from "#/images/shared/layout.js";
-import { font } from "#/images/shared/typography.js";
+import { drawEmoji } from "#src/images/shared/emoji.js";
+import { SCALE, COLORS, withAlpha } from "#src/images/shared/layout.js";
+import { font } from "#src/images/shared/typography.js";
 
 const imageCache = new Map<string, Awaited<ReturnType<typeof loadImage>>>();
 

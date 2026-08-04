@@ -8,8 +8,8 @@ import {
   type APIMessageTopLevelComponent,
   type JSONEncodable,
 } from "discord.js";
-import { IS_COMPONENTS_V2 } from "#/discord/constants.js";
-import { CAMPFIRE_ORANGE } from "#/embeds/base.js";
+import { IS_COMPONENTS_V2 } from "#src/discord/constants.js";
+import { CAMPFIRE_ORANGE } from "#src/embeds/base.js";
 import {
   formatCategoryHeader,
   formatEmptyInventory,
@@ -20,7 +20,7 @@ import {
   type InventoryFilter,
   type InventoryFilterOption,
   type InventoryItemView,
-} from "#/game/services/inventory/index.js";
+} from "#src/game/services/inventory/index.js";
 import { FILTER_SELECT_CUSTOM_ID } from "./inventoryState.js";
 import type {
   FilledInventoryRenderModel,

@@ -1,12 +1,12 @@
-import { pool } from "#/database/client.js";
-import type { Db } from "#/database/db.js";
-import type { Player } from "#/database/repositories/playerRepository.js";
-import { statValueFromPlayer } from "#/database/repositories/statRepository.js";
-import { getJournal } from "#/game/services/journal/index.js";
+import { pool } from "#src/database/client.js";
+import type { Db } from "#src/database/db.js";
+import type { Player } from "#src/database/repositories/playerRepository.js";
+import { statValueFromPlayer } from "#src/database/repositories/statRepository.js";
+import { getJournal } from "#src/game/services/journal/index.js";
 import {
   STATISTIC_DEFINITIONS,
   type StatisticDefinition,
-} from "#/game/data/statistics.js";
+} from "#src/game/data/statistics.js";
 
 export interface StatisticValue {
   definition: StatisticDefinition;
@@ -76,4 +76,4 @@ export async function getStatistics(
   }));
 }
 
-export type { PlayerStatField } from "#/database/repositories/statRepository.js";
+export type { PlayerStatField } from "#src/database/repositories/statRepository.js";

@@ -1,6 +1,6 @@
-import { redis } from "#/redis/client.js";
-import { RedisKeys } from "#/redis/keys.js";
-import type { Guard } from "#/guards/index.js";
+import { redis } from "#src/redis/client.js";
+import { RedisKeys } from "#src/redis/keys.js";
+import type { Guard } from "#src/guards/index.js";
 
 export const notInAdventure: Guard = async (ctx) => {
   const exists = await redis.exists(

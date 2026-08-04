@@ -1,8 +1,8 @@
-import { findByPlayerId } from "#/database/repositories/inventoryRepository.js";
-import { findByIds } from "#/database/repositories/itemRepository.js";
-import { CATEGORY_INFO, CATEGORY_ORDER } from "#/game/data/categories.js";
-import { ITEMS } from "#/game/data/items.js";
-import type { ItemCategory, ItemDefinition } from "#/game/types.js";
+import { findByPlayerId } from "#src/database/repositories/inventoryRepository.js";
+import { findByIds } from "#src/database/repositories/itemRepository.js";
+import { CATEGORY_INFO, CATEGORY_ORDER } from "#src/game/data/categories.js";
+import { ITEMS } from "#src/game/data/items.js";
+import type { ItemCategory, ItemDefinition } from "#src/game/types.js";
 
 export interface InventoryItemView {
   readonly itemKey: string;

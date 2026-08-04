@@ -1,9 +1,9 @@
 import type { SKRSContext2D } from "@napi-rs/canvas";
-import { drawEmoji } from "#/images/shared/emoji.js";
-import { fillRoundRect } from "#/images/shared/canvas.js";
-import { SCALE, COLORS, withAlpha } from "#/images/shared/layout.js";
-import { font } from "#/images/shared/typography.js";
-import type { BuildingCardData } from "#/images/types/index.js";
+import { drawEmoji } from "#src/images/shared/emoji.js";
+import { fillRoundRect } from "#src/images/shared/canvas.js";
+import { SCALE, COLORS, withAlpha } from "#src/images/shared/layout.js";
+import { font } from "#src/images/shared/typography.js";
+import type { BuildingCardData } from "#src/images/types/index.js";
 
 export async function drawBuildingCard(
   ctx: SKRSContext2D,

@@ -1,6 +1,6 @@
 import { Events, ActivityType, type Client } from "discord.js";
-import type { Event } from "#/types/index.js";
-import { logger } from "#/utils/logger.js";
+import type { Event } from "#src/types/index.js";
+import { logger } from "#src/utils/logger.js";
 
 const event: Event = {
   name: Events.ClientReady,

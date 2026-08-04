@@ -3,8 +3,8 @@ import {
   type ButtonInteraction,
   type StringSelectMenuInteraction,
 } from "discord.js";
-import { errorEmbed } from "#/embeds/index.js";
-import { logger } from "#/utils/logger.js";
+import { errorEmbed } from "#src/embeds/index.js";
+import { logger } from "#src/utils/logger.js";
 
 export async function assertMessageAuthor(
   interaction: ButtonInteraction | StringSelectMenuInteraction,

@@ -1,13 +1,13 @@
-import type { StringSelectMenuHandler } from "#/types/index.js";
-import { SHOP_SELECT_PREFIX } from "#/discord/customIds.js";
+import type { StringSelectMenuHandler } from "#src/types/index.js";
+import { SHOP_SELECT_PREFIX } from "#src/discord/customIds.js";
 import {
   buildShopNoticePayload,
   buildShopPayload,
-} from "#/discord/components/shop/buildShopComponents.js";
-import { getShop } from "#/game/services/shop/index.js";
-import { findByDiscordId } from "#/database/repositories/playerRepository.js";
-import { assertMessageAuthor } from "#/utils/interactionAuthor.js";
-import { logger } from "#/utils/logger.js";
+} from "#src/discord/components/shop/buildShopComponents.js";
+import { getShop } from "#src/game/services/shop/index.js";
+import { findByDiscordId } from "#src/database/repositories/playerRepository.js";
+import { assertMessageAuthor } from "#src/utils/interactionAuthor.js";
+import { logger } from "#src/utils/logger.js";
 
 async function handleShopSelect(
   interaction: Parameters<StringSelectMenuHandler>[0],

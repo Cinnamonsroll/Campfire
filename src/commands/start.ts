@@ -4,9 +4,9 @@ import {
   ButtonBuilder,
   ButtonStyle,
 } from "discord.js";
-import { welcomeIntro } from "#/embeds/index.js";
-import type { Command } from "#/types/index.js";
-import { noCharacter } from "#/guards/player.js";
+import { welcomeIntro } from "#src/embeds/index.js";
+import type { Command } from "#src/types/index.js";
+import { noCharacter } from "#src/guards/player.js";
 
 const command: Command = {
   data: new SlashCommandBuilder()

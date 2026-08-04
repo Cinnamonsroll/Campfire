@@ -1,12 +1,12 @@
 import { campfireEmbed } from "./base.js";
-import { getItemDefinition } from "#/game/data/items.js";
-import type { TradeItems } from "#/database/repositories/tradeRepository.js";
+import { getItemDefinition } from "#src/game/data/items.js";
+import type { TradeItems } from "#src/database/repositories/tradeRepository.js";
 import type {
   TradeExchangeSummary,
   TradeParticipant,
   TradeState,
-} from "#/game/services/tradeService.js";
-import { markup } from "#/utils/markup.js";
+} from "#src/game/services/tradeService.js";
+import { markup } from "#src/utils/markup.js";
 
 function itemLines(items: TradeItems): string[] {
   return Object.entries(items)

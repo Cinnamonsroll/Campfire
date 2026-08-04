@@ -1,5 +1,5 @@
-import { ITEMS } from "#/game/data/items.js";
-import type { ItemRarity } from "#/game/types.js";
+import { ITEMS } from "#src/game/data/items.js";
+import type { ItemRarity } from "#src/game/types.js";
 
 export interface ShopEntry {
   key: string;

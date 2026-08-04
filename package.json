@@ -15,7 +15,7 @@
     "format:check": "prettier --check src/"
   },
   "imports": {
-    "#/*": "./src/*"
+    "#src/*": "./src/*"
   },
   "engines": {
     "node": ">=18"

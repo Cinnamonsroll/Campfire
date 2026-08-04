@@ -1,5 +1,5 @@
 import { Collection } from "discord.js";
-import type { Command } from "#/types/index.js";
+import type { Command } from "#src/types/index.js";
 import {
   readdirSync,
   join,

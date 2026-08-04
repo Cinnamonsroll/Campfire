@@ -1,25 +1,25 @@
-import type { ButtonHandler } from "#/types/index.js";
+import type { ButtonHandler } from "#src/types/index.js";
 import { MessageFlags } from "discord.js";
-import { DAILY_CLAIM_PREFIX } from "#/discord/customIds.js";
-import { buildClaimRow } from "#/discord/components/daily/buildDailyComponents.js";
+import { DAILY_CLAIM_PREFIX } from "#src/discord/customIds.js";
+import { buildClaimRow } from "#src/discord/components/daily/buildDailyComponents.js";
 import {
   dailyClaimedEmbed,
   dailyQuestsEmbed,
   errorEmbed,
-} from "#/embeds/index.js";
-import { findByDiscordId } from "#/database/repositories/playerRepository.js";
+} from "#src/embeds/index.js";
+import { findByDiscordId } from "#src/database/repositories/playerRepository.js";
 import {
   findById,
   findDailyByPlayerId,
   type DailyQuestRow,
-} from "#/database/repositories/questRepository.js";
+} from "#src/database/repositories/questRepository.js";
 import {
   claimDailyQuest,
   getDailyQuests,
-} from "#/game/services/dailyQuestService.js";
-import { todayKey } from "#/game/utils/date.js";
-import { assertMessageAuthor } from "#/utils/interactionAuthor.js";
-import { logger } from "#/utils/logger.js";
+} from "#src/game/services/dailyQuestService.js";
+import { todayKey } from "#src/game/utils/date.js";
+import { assertMessageAuthor } from "#src/utils/interactionAuthor.js";
+import { logger } from "#src/utils/logger.js";
 
 async function resolveClaimableQuest(
   playerId: string,

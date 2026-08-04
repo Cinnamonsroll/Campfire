@@ -4,7 +4,7 @@ import type {
   ModalSubmitInteraction,
   StringSelectMenuInteraction,
 } from "discord.js";
-import type { CommandContext, Guard } from "#/guards/index.js";
+import type { CommandContext, Guard } from "#src/guards/index.js";
 
 export interface PermissionCheck {
   check: (

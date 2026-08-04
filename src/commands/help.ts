@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "discord.js";
-import type { Command } from "#/types/index.js";
-import { hasCharacter } from "#/guards/index.js";
-import { buildHelpPayload } from "#/discord/components/help/buildHelpComponents.js";
+import type { Command } from "#src/types/index.js";
+import { hasCharacter } from "#src/guards/index.js";
+import { buildHelpPayload } from "#src/discord/components/help/buildHelpComponents.js";
 
 const command: Command = {
   data: new SlashCommandBuilder()

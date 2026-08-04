@@ -1,8 +1,8 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { pool } from "#/database/client.js";
-import { logger } from "#/utils/logger.js";
+import { pool } from "#src/database/client.js";
+import { logger } from "#src/utils/logger.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

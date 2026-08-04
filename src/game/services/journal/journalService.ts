@@ -1,13 +1,13 @@
-import { pool } from "#/database/client.js";
-import type { Db } from "#/database/db.js";
+import { pool } from "#src/database/client.js";
+import type { Db } from "#src/database/db.js";
 import {
   addDiscoveries,
   ensureDiscoveryByKeys,
   findPlayerDiscoveries,
-} from "#/database/repositories/discoveryRepository.js";
-import { CATEGORY_INFO, CATEGORY_ORDER } from "#/game/data/categories.js";
-import { ITEMS } from "#/game/data/items.js";
-import type { ItemCategory, ItemDefinition } from "#/game/types.js";
+} from "#src/database/repositories/discoveryRepository.js";
+import { CATEGORY_INFO, CATEGORY_ORDER } from "#src/game/data/categories.js";
+import { ITEMS } from "#src/game/data/items.js";
+import type { ItemCategory, ItemDefinition } from "#src/game/types.js";
 
 export interface JournalEntry extends ItemDefinition {
   discovered: boolean;

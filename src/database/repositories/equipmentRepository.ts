@@ -1,4 +1,4 @@
-import { pool } from "#/database/client.js";
+import { pool } from "#src/database/client.js";
 
 export interface EquipmentEntry {
   id: string;

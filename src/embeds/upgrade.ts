@@ -1,7 +1,7 @@
 import { campfireEmbed } from "./base.js";
-import { markup } from "#/utils/markup.js";
-import type { UpgradeResult } from "#/game/services/upgradeService.js";
-import type { AchievementDefinition } from "#/game/types.js";
+import { markup } from "#src/utils/markup.js";
+import type { UpgradeResult } from "#src/game/services/upgradeService.js";
+import type { AchievementDefinition } from "#src/game/types.js";
 
 export function upgradeResultEmbed(
   result: UpgradeResult,

@@ -1,8 +1,8 @@
 import type { MessageComponentInteraction } from "discord.js";
-import { findByDiscordId } from "#/database/repositories/playerRepository.js";
-import { buildInventoryReply } from "#/discord/components/inventory/buildInventoryView.js";
-import { buildNoticePayload } from "#/discord/components/inventory/buildInventoryComponents.js";
-import type { InventoryFilter } from "#/game/services/inventory/index.js";
+import { findByDiscordId } from "#src/database/repositories/playerRepository.js";
+import { buildInventoryReply } from "#src/discord/components/inventory/buildInventoryView.js";
+import { buildNoticePayload } from "#src/discord/components/inventory/buildInventoryComponents.js";
+import type { InventoryFilter } from "#src/game/services/inventory/index.js";
 
 const NO_CAMPER_MESSAGE =
   "No camper here yet. Use `/start` to begin your summer.";

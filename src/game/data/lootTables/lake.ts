@@ -1,4 +1,4 @@
-import type { LootTable } from "#/game/types.js";
+import type { LootTable } from "#src/game/types.js";
 
 export const LAKE_LOOT_TABLE: LootTable = {
   key: "lake",

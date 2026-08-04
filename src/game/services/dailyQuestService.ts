@@ -1,5 +1,5 @@
-import { pool } from "#/database/client.js";
-import type { Db } from "#/database/db.js";
+import { pool } from "#src/database/client.js";
+import type { Db } from "#src/database/db.js";
 import {
   ensurePlayerQuestRow,
   findDailyByPlayerId,
@@ -8,22 +8,22 @@ import {
   upsertQuests,
   type DailyQuestRow,
   type PlayerQuest,
-} from "#/database/repositories/questRepository.js";
-import { findByPlayerId as findCamp } from "#/database/repositories/campRepository.js";
-import type { Player } from "#/database/repositories/playerRepository.js";
-import { addStats } from "#/database/repositories/statRepository.js";
-import { QUESTS } from "#/game/data/quests.js";
+} from "#src/database/repositories/questRepository.js";
+import { findByPlayerId as findCamp } from "#src/database/repositories/campRepository.js";
+import type { Player } from "#src/database/repositories/playerRepository.js";
+import { addStats } from "#src/database/repositories/statRepository.js";
+import { QUESTS } from "#src/game/data/quests.js";
 import {
   getBuildingLevel,
   getXpMultiplier,
-} from "#/game/services/campService.js";
+} from "#src/game/services/campService.js";
 import {
   grantRewards,
   type RewardSummary,
-} from "#/game/rewards/rewardService.js";
-import { withTransaction } from "#/database/transaction.js";
-import { secondsUntilTomorrow, todayKey } from "#/game/utils/date.js";
-import { redis } from "#/redis/client.js";
+} from "#src/game/rewards/rewardService.js";
+import { withTransaction } from "#src/database/transaction.js";
+import { secondsUntilTomorrow, todayKey } from "#src/game/utils/date.js";
+import { redis } from "#src/redis/client.js";
 
 export interface ProgressionEvents {
   locationKey?: string;

@@ -1,6 +1,6 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
-import { encodeComponentState } from "#/discord/components/componentState.js";
-import type { TradeState } from "#/game/services/tradeService.js";
+import { encodeComponentState } from "#src/discord/components/componentState.js";
+import type { TradeState } from "#src/game/services/tradeService.js";
 
 export const TRADE_PREFIX = "trade";
 export const TRADE_ACCEPT = "accept";

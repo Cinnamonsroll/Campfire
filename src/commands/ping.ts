@@ -1,9 +1,9 @@
 import { SlashCommandBuilder } from "discord.js";
-import { campfireEmbed } from "#/embeds/index.js";
-import { pool } from "#/database/client.js";
-import { markup } from "#/utils/markup.js";
-import type { Command } from "#/types/index.js";
-import { logger } from "#/utils/logger.js";
+import { campfireEmbed } from "#src/embeds/index.js";
+import { pool } from "#src/database/client.js";
+import { markup } from "#src/utils/markup.js";
+import type { Command } from "#src/types/index.js";
+import { logger } from "#src/utils/logger.js";
 
 const command: Command = {
   data: new SlashCommandBuilder()

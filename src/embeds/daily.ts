@@ -1,8 +1,8 @@
 import { campfireEmbed } from "./base.js";
-import { markup } from "#/utils/markup.js";
-import { rewardLines } from "#/game/rewards/format.js";
-import type { RewardSummary } from "#/game/rewards/rewardService.js";
-import type { DailyQuestRow } from "#/database/repositories/questRepository.js";
+import { markup } from "#src/utils/markup.js";
+import { rewardLines } from "#src/game/rewards/format.js";
+import type { RewardSummary } from "#src/game/rewards/rewardService.js";
+import type { DailyQuestRow } from "#src/database/repositories/questRepository.js";
 
 function progressBar(current: number, target: number): string {
   const width = 10;
