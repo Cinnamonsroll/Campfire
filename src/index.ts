@@ -24,6 +24,7 @@ import {
   loadInteractionHandlers,
   interactionsDir,
 } from "./utils/loaders/interactions.js";
+import { existsSync } from "node:fs";
 
 declare module "discord.js" {
   interface Client {
@@ -71,7 +72,17 @@ async function main(): Promise<void> {
       join(__dirname, "images", "assets", "fonts", "SegoeUIBold.ttf"),
       "Segoe UI",
     );
-    console.log("Fonts registered", GlobalFonts.families);
+    // console.log("Fonts registered", GlobalFonts.families);
+    const fontPath = join(
+  __dirname,
+  "images",
+  "assets",
+  "fonts",
+  "SegoeUI.ttf",
+);
+
+console.log(fontPath);
+console.log(existsSync(fontPath));
     logger.info("Registering global slash commands");
     await rest.put(Routes.applicationCommands(env.CLIENT_ID), {
       body: commands.map((cmd) => cmd.data.toJSON()),
