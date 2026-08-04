@@ -12,16 +12,16 @@ import {
   type APIMessageTopLevelComponent,
   type JSONEncodable,
 } from "discord.js";
-import { IS_COMPONENTS_V2 } from "#src/discord/constants.js";
+import { IS_COMPONENTS_V2 } from "../discord/constants.js";
 import {
   SHOP_BUY_PREFIX,
   SHOP_CANCEL_PREFIX,
   SHOP_SELECT_PREFIX,
-} from "#src/discord/customIds.js";
-import { encodeComponentState } from "#src/discord/components/componentState.js";
-import { CAMPFIRE_ORANGE } from "#src/embeds/base.js";
-import { markup } from "#src/utils/markup.js";
-import type { ShopItemView, ShopView } from "#src/game/services/shop/index.js";
+} from "../discord/customIds.js";
+import { encodeComponentState } from "../discord/components/componentState.js";
+import { CAMPFIRE_ORANGE } from "../embeds/base.js";
+import { markup } from "../utils/markup.js";
+import type { ShopItemView, ShopView } from "../game/services/shop/index.js";
 
 export interface ShopComponentPayload {
   readonly components: JSONEncodable<APIMessageTopLevelComponent>[];

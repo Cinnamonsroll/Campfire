@@ -1,8 +1,8 @@
 import { SlashCommandBuilder } from "discord.js";
-import { buildInventoryReply } from "#src/discord/components/inventory/buildInventoryView.js";
-import { ALL_FILTER } from "#src/game/services/inventory/index.js";
-import { hasCharacter } from "#src/guards/index.js";
-import type { Command } from "#src/types/index.js";
+import { buildInventoryReply } from "../discord/components/inventory/buildInventoryView.js";
+import { ALL_FILTER } from "../game/services/inventory/index.js";
+import { hasCharacter } from "../guards/index.js";
+import type { Command } from "../types/index.js";
 
 const command: Command = {
   data: new SlashCommandBuilder()

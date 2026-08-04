@@ -1,7 +1,7 @@
 import type { SKRSContext2D } from "@napi-rs/canvas";
-import { drawEmoji } from "#src/images/shared/emoji.js";
-import { roundRect } from "#src/images/shared/canvas.js";
-import { SCALE, COLORS, withAlpha } from "#src/images/shared/layout.js";
+import { drawEmoji } from "../images/shared/emoji.js";
+import { roundRect } from "../images/shared/canvas.js";
+import { SCALE, COLORS, withAlpha } from "../images/shared/layout.js";
 
 async function groundEmoji(
   ctx: SKRSContext2D,

@@ -1,9 +1,7 @@
-import {
-  type ChatInputCommandInteraction,
-  type PermissionResolvable,
-} from "discord.js";
-import type { PermissionCheck } from "#src/types/index.js";
-import { ownerIds } from "#src/config/index.js";
+import { PermissionResolvable, ChatInputCommandInteraction } from "discord.js";
+import { ownerIds } from "../config";
+import { PermissionCheck } from "../types";
+
 
 export function userPermission(
   ...permissions: PermissionResolvable[]

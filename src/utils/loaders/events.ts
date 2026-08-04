@@ -1,4 +1,4 @@
-import type { Event } from "#src/types/index.js";
+import type { Event } from "../types/index.js";
 import {
   readdirSync,
   join,

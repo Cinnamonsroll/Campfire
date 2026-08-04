@@ -1,9 +1,9 @@
 import { SlashCommandBuilder } from "discord.js";
-import type { Command } from "#src/types/index.js";
-import { hasCharacter, notInAdventure, energyAtLeast } from "#src/guards/index.js";
-import { buildPlayReply } from "#src/discord/components/play/buildPlayComponents.js";
-import { getUnlockedLocations } from "#src/game/services/locationService.js";
-import { getLockedLocations } from "#src/game/services/unlockService.js";
+import type { Command } from "../types/index.js";
+import { hasCharacter, notInAdventure, energyAtLeast } from "../guards/index.js";
+import { buildPlayReply } from "../discord/components/play/buildPlayComponents.js";
+import { getUnlockedLocations } from "../game/services/locationService.js";
+import { getLockedLocations } from "../game/services/unlockService.js";
 
 const command: Command = {
   data: new SlashCommandBuilder()

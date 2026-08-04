@@ -1,16 +1,16 @@
 import { MessageFlags, SlashCommandBuilder } from "discord.js";
-import type { Command } from "#src/types/index.js";
-import { logger } from "#src/utils/logger.js";
-import { generateCampsiteCard } from "#src/images/index.js";
-import { errorEmbed } from "#src/embeds/index.js";
-import { getCampsite } from "#src/game/services/campService.js";
-import { getCampRow } from "#src/game/services/upgradeService.js";
+import type { Command } from "../types/index.js";
+import { logger } from "../utils/logger.js";
+import { generateCampsiteCard } from "../images/index.js";
+import { errorEmbed } from "../embeds/index.js";
+import { getCampsite } from "../game/services/campService.js";
+import { getCampRow } from "../game/services/upgradeService.js";
 import {
   buildCampsiteNoticePayload,
   campsitePayload,
-} from "#src/discord/components/camp/buildCampComponents.js";
-import { IS_COMPONENTS_V2 } from "#src/discord/constants.js";
-import { findByDiscordId } from "#src/database/repositories/playerRepository.js";
+} from "../discord/components/camp/buildCampComponents.js";
+import { IS_COMPONENTS_V2 } from "../discord/constants.js";
+import { findByDiscordId } from "../database/repositories/playerRepository.js";
 
 const command: Command = {
   data: new SlashCommandBuilder()

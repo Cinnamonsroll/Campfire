@@ -1,16 +1,16 @@
 import { MessageFlags } from "discord.js";
-import type { ModalHandler } from "#src/types/index.js";
-import { TRADE_ITEM_MODAL } from "#src/discord/components/trade/buildTradeComponents.js";
-import { errorEmbed, campfireEmbed } from "#src/embeds/index.js";
-import { findByDiscordId } from "#src/database/repositories/playerRepository.js";
-import { findById as findTradeById } from "#src/database/repositories/tradeRepository.js";
+import type { ModalHandler } from "../types/index.js";
+import { TRADE_ITEM_MODAL } from "../discord/components/trade/buildTradeComponents.js";
+import { errorEmbed, campfireEmbed } from "../embeds/index.js";
+import { findByDiscordId } from "../database/repositories/playerRepository.js";
+import { findById as findTradeById } from "../database/repositories/tradeRepository.js";
 import {
   addItem,
   removeItem,
   TradeError,
-} from "#src/game/services/tradeService.js";
-import { refreshTradeMessage } from "#src/interactions/buttons/trade/index.js";
-import { logger } from "#src/utils/logger.js";
+} from "../game/services/tradeService.js";
+import { refreshTradeMessage } from "../interactions/buttons/trade/index.js";
+import { logger } from "../utils/logger.js";
 
 async function handleTradeItemModal(
   interaction: Parameters<ModalHandler>[0],

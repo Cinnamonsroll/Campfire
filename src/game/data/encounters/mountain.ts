@@ -1,4 +1,4 @@
-import type { EncounterDefinition } from "#src/game/types.js";
+import type { EncounterDefinition } from "../game/types.js";
 
 export const MOUNTAIN_ENCOUNTERS: EncounterDefinition[] = [
   {

@@ -1,5 +1,4 @@
 import { Collection } from "discord.js";
-import type { Command } from "#src/types/index.js";
 import {
   readdirSync,
   join,
@@ -7,6 +6,7 @@ import {
   logger,
   loaderDirname,
 } from "./index.js";
+import { Command } from "../../types/index.js";
 
 const __dirname = loaderDirname(import.meta);
 

@@ -10,18 +10,18 @@ import type {
   ButtonHandler,
   ModalHandler,
   StringSelectMenuHandler,
-} from "#src/types/index.js";
-import { env } from "#src/config/index.js";
-import { pool } from "#src/database/client.js";
-import { connectRedis, disconnectRedis } from "#src/redis/client.js";
-import { logger } from "#src/utils/logger.js";
-import { loadCommands } from "#src/utils/loaders/commands.js";
-import { loadEvents } from "#src/utils/loaders/events.js";
+} from "./types/index.js";
+import { env } from "./config/index.js";
+import { pool } from "./database/client.js";
+import { connectRedis, disconnectRedis } from "./redis/client.js";
+import { logger } from "./utils/logger.js";
+import { loadCommands } from "./utils/loaders/commands.js";
+import { loadEvents } from "./utils/loaders/events.js";
 import { join } from "node:path";
 import {
   loadInteractionHandlers,
   interactionsDir,
-} from "#src/utils/loaders/interactions.js";
+} from "./utils/loaders/interactions.js";
 
 declare module "discord.js" {
   interface Client {

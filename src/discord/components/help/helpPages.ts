@@ -1,4 +1,4 @@
-import { markup } from "#src/utils/markup.js";
+import { markup } from "../utils/markup.js";
 
 export interface HelpPage {
   emoji: string;

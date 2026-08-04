@@ -1,31 +1,31 @@
-import { redis } from "#src/redis/client.js";
-import { RedisKeys } from "#src/redis/keys.js";
-import { LOCATIONS } from "#src/game/data/locations.js";
-import { ENCOUNTER_TABLES } from "#src/game/data/encounters/index.js";
-import { rollEncounter } from "#src/game/encounters/roll.js";
+import { redis } from "../redis/client.js";
+import { RedisKeys } from "../redis/keys.js";
+import { LOCATIONS } from "../game/data/locations.js";
+import { ENCOUNTER_TABLES } from "../game/data/encounters/index.js";
+import { rollEncounter } from "../game/encounters/roll.js";
 import {
   findByDiscordId,
   update as updatePlayer,
-} from "#src/database/repositories/playerRepository.js";
+} from "../database/repositories/playerRepository.js";
 import {
   grantRewards,
   StorageFullError,
   type RewardSummary,
-} from "#src/game/rewards/rewardService.js";
-import { findByPlayerId as findCamp } from "#src/database/repositories/campRepository.js";
-import { countTotal } from "#src/database/repositories/inventoryRepository.js";
+} from "../game/rewards/rewardService.js";
+import { findByPlayerId as findCamp } from "../database/repositories/campRepository.js";
+import { countTotal } from "../database/repositories/inventoryRepository.js";
 import {
   applyProgression,
   type ProgressionResult,
-} from "#src/game/services/progressionService.js";
-import { recordLocationVisit } from "#src/game/services/statsService.js";
-import { withTransaction } from "#src/database/transaction.js";
+} from "../game/services/progressionService.js";
+import { recordLocationVisit } from "../game/services/statsService.js";
+import { withTransaction } from "../database/transaction.js";
 import {
   getBuildingLevel,
   getStorageCapacity,
-} from "#src/game/services/campService.js";
-import type { LocationDefinition, EncounterDefinition } from "#src/game/types.js";
-import type { Player } from "#src/database/repositories/playerRepository.js";
+} from "../game/services/campService.js";
+import type { LocationDefinition, EncounterDefinition } from "../game/types.js";
+import type { Player } from "../database/repositories/playerRepository.js";
 
 const ADVENTURE_TTL_SECONDS = 900;
 

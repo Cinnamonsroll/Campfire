@@ -1,12 +1,12 @@
 import { MessageFlags, SlashCommandBuilder } from "discord.js";
-import type { Command } from "#src/types/index.js";
-import { hasCharacter } from "#src/guards/index.js";
-import { tradeEmbed } from "#src/embeds/index.js";
-import { errorEmbed } from "#src/embeds/index.js";
-import { buildTradeActionRows } from "#src/discord/components/trade/buildTradeComponents.js";
-import { findByDiscordId } from "#src/database/repositories/playerRepository.js";
-import { setMessageRef } from "#src/database/repositories/tradeRepository.js";
-import { createTrade, TradeError } from "#src/game/services/tradeService.js";
+import type { Command } from "../types/index.js";
+import { hasCharacter } from "../guards/index.js";
+import { tradeEmbed } from "../embeds/index.js";
+import { errorEmbed } from "../embeds/index.js";
+import { buildTradeActionRows } from "../discord/components/trade/buildTradeComponents.js";
+import { findByDiscordId } from "../database/repositories/playerRepository.js";
+import { setMessageRef } from "../database/repositories/tradeRepository.js";
+import { createTrade, TradeError } from "../game/services/tradeService.js";
 
 const command: Command = {
   data: new SlashCommandBuilder()

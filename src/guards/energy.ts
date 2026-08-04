@@ -1,4 +1,4 @@
-import type { Guard } from "#src/guards/index.js";
+import type { Guard } from "../guards/index.js";
 
 export function energyAtLeast(min: number): Guard {
   return (ctx) => {

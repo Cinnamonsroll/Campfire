@@ -1,14 +1,14 @@
-import { pool } from "#src/database/client.js";
-import type { Db } from "#src/database/db.js";
+import { pool } from "../database/client.js";
+import type { Db } from "../database/db.js";
 import {
   findByPlayerId as findCamp,
   type PlayerCamp,
-} from "#src/database/repositories/campRepository.js";
+} from "../database/repositories/campRepository.js";
 import {
   update as updatePlayer,
   type Player,
-} from "#src/database/repositories/playerRepository.js";
-import { getBuildingLevel, getMaxEnergy } from "#src/game/services/campService.js";
+} from "../database/repositories/playerRepository.js";
+import { getBuildingLevel, getMaxEnergy } from "../game/services/campService.js";
 
 export const ENERGY_RESTORE_HOURS = 12;
 

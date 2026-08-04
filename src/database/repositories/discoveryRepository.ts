@@ -1,5 +1,5 @@
-import { pool } from "#src/database/client.js";
-import type { Db } from "#src/database/db.js";
+import { pool } from "../database/client.js";
+import type { Db } from "../database/db.js";
 
 export interface DiscoveryRow {
   id: string;

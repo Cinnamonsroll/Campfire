@@ -1,6 +1,6 @@
-import { pool } from "#src/database/client.js";
-import type { Db } from "#src/database/db.js";
-import { logger } from "#src/utils/logger.js";
+import { pool } from "../database/client.js";
+import type { Db } from "../database/db.js";
+import { logger } from "../utils/logger.js";
 
 export async function withTransaction<T>(
   fn: (db: Db) => Promise<T>,

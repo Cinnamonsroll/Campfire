@@ -1,9 +1,10 @@
 import { SlashCommandBuilder } from "discord.js";
-import type { Command } from "#src/types/index.js";
-import { hasCharacter } from "#src/guards/index.js";
-import { dailyQuestsEmbed } from "#src/embeds/index.js";
-import { buildClaimRow } from "#src/discord/components/daily/buildDailyComponents.js";
-import { getDailyQuests } from "#src/game/services/dailyQuestService.js";
+import { buildClaimRow } from "../discord/components/daily/buildDailyComponents";
+import { dailyQuestsEmbed } from "../embeds";
+import { getDailyQuests } from "../game/services/dailyQuestService";
+import { hasCharacter } from "../guards";
+import { Command } from "../types";
+
 
 const command: Command = {
   data: new SlashCommandBuilder()

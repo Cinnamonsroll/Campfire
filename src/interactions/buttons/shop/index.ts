@@ -1,19 +1,19 @@
 import { MessageFlags } from "discord.js";
-import type { ButtonHandler } from "#src/types/index.js";
-import { SHOP_BUY_PREFIX, SHOP_CANCEL_PREFIX } from "#src/discord/customIds.js";
+import type { ButtonHandler } from "../types/index.js";
+import { SHOP_BUY_PREFIX, SHOP_CANCEL_PREFIX } from "../discord/customIds.js";
 import {
   buildShopNoticePayload,
   buildShopPayload,
-} from "#src/discord/components/shop/buildShopComponents.js";
+} from "../discord/components/shop/buildShopComponents.js";
 import {
   getShop,
   purchaseItem,
   ShopError,
-} from "#src/game/services/shop/index.js";
-import { findByDiscordId } from "#src/database/repositories/playerRepository.js";
-import { errorEmbed } from "#src/embeds/index.js";
-import { assertMessageAuthor } from "#src/utils/interactionAuthor.js";
-import { logger } from "#src/utils/logger.js";
+} from "../game/services/shop/index.js";
+import { findByDiscordId } from "../database/repositories/playerRepository.js";
+import { errorEmbed } from "../embeds/index.js";
+import { assertMessageAuthor } from "../utils/interactionAuthor.js";
+import { logger } from "../utils/logger.js";
 
 async function refreshShop(
   interaction: Parameters<ButtonHandler>[0],

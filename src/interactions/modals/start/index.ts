@@ -1,18 +1,18 @@
-import type { ModalHandler } from "#src/types/index.js";
+import type { ModalHandler } from "../types/index.js";
 import { MessageFlags } from "discord.js";
-import { logger } from "#src/utils/logger.js";
-import { errorEmbed, campfireEmbed, welcomeCeremony } from "#src/embeds/index.js";
-import { generateCamperCard } from "#src/images/index.js";
+import { logger } from "../utils/logger.js";
+import { errorEmbed, campfireEmbed, welcomeCeremony } from "../embeds/index.js";
+import { generateCamperCard } from "../images/index.js";
 import {
   findByDiscordId,
   create,
-} from "#src/database/repositories/playerRepository.js";
-import { ensureItemsByKeys } from "#src/database/repositories/itemRepository.js";
-import { addItems } from "#src/database/repositories/inventoryRepository.js";
-import { ITEMS } from "#src/game/data/items.js";
-import { STARTING_ITEM_KEYS } from "#src/game/data/startingItems.js";
-import { getTitle } from "#src/game/utils/titles.js";
-import { xpToNextLevel } from "#src/game/utils/xp.js";
+} from "../database/repositories/playerRepository.js";
+import { ensureItemsByKeys } from "../database/repositories/itemRepository.js";
+import { addItems } from "../database/repositories/inventoryRepository.js";
+import { ITEMS } from "../game/data/items.js";
+import { STARTING_ITEM_KEYS } from "../game/data/startingItems.js";
+import { getTitle } from "../game/utils/titles.js";
+import { xpToNextLevel } from "../game/utils/xp.js";
 
 async function handleNameSubmit(
   interaction: Parameters<ModalHandler>[0],

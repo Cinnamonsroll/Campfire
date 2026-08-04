@@ -1,7 +1,7 @@
 import { readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { logger } from "#src/utils/logger.js";
+import { logger } from "../utils/logger.js";
 
 export { readdirSync, join, dirname, fileURLToPath, logger };
 export { pathToFileURL } from "node:url";

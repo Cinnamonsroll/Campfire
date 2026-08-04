@@ -1,16 +1,9 @@
-import { createCanvas, type SKRSContext2D } from "@napi-rs/canvas";
-import type {
-  StatisticCardData,
-  StatisticsCardData,
-} from "#src/images/types/index.js";
-import {
-  drawAvatar,
-  drawProgressBar,
-  fillRoundRect,
-} from "#src/images/shared/canvas.js";
-import { drawEmoji, prefetchEmojis } from "#src/images/shared/emoji.js";
-import { COLORS, SCALE, withAlpha } from "#src/images/shared/layout.js";
-import { font } from "#src/images/shared/typography.js";
+import { SKRSContext2D, createCanvas } from "@napi-rs/canvas";
+import { fillRoundRect, drawProgressBar, drawAvatar } from "../shared/canvas";
+import { drawEmoji, prefetchEmojis } from "../shared/emoji";
+import { SCALE, withAlpha, COLORS } from "../shared/layout";
+import { font } from "../shared/typography";
+import { StatisticCardData, StatisticsCardData } from "../types";
 
 const CARD_WIDTH = 640 * SCALE;
 const PADDING = 18 * SCALE;

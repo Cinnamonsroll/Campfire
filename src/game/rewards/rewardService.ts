@@ -1,13 +1,13 @@
-import type { Player } from "#src/database/repositories/playerRepository.js";
-import { update as updatePlayer } from "#src/database/repositories/playerRepository.js";
-import { pool } from "#src/database/client.js";
-import { ensureItemsByKeys } from "#src/database/repositories/itemRepository.js";
-import { addItems } from "#src/database/repositories/inventoryRepository.js";
-import { addStats } from "#src/database/repositories/statRepository.js";
-import { withTransaction } from "#src/database/transaction.js";
-import { grantXp, type GrantXpResult } from "#src/game/utils/xp.js";
-import { ITEMS } from "#src/game/data/items.js";
-import type { Db } from "#src/database/db.js";
+import type { Player } from "../database/repositories/playerRepository.js";
+import { update as updatePlayer } from "../database/repositories/playerRepository.js";
+import { pool } from "../database/client.js";
+import { ensureItemsByKeys } from "../database/repositories/itemRepository.js";
+import { addItems } from "../database/repositories/inventoryRepository.js";
+import { addStats } from "../database/repositories/statRepository.js";
+import { withTransaction } from "../database/transaction.js";
+import { grantXp, type GrantXpResult } from "../game/utils/xp.js";
+import { ITEMS } from "../game/data/items.js";
+import type { Db } from "../database/db.js";
 
 export interface RewardItemGrant {
   itemKey: string;

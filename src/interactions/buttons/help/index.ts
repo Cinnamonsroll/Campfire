@@ -1,8 +1,8 @@
-import type { ButtonHandler } from "#src/types/index.js";
-import { HELP_PAGE_PREFIX } from "#src/discord/customIds.js";
-import { buildHelpPayload } from "#src/discord/components/help/buildHelpComponents.js";
-import { assertMessageAuthor } from "#src/utils/interactionAuthor.js";
-import { logger } from "#src/utils/logger.js";
+import type { ButtonHandler } from "../types/index.js";
+import { HELP_PAGE_PREFIX } from "../discord/customIds.js";
+import { buildHelpPayload } from "../discord/components/help/buildHelpComponents.js";
+import { assertMessageAuthor } from "../utils/interactionAuthor.js";
+import { logger } from "../utils/logger.js";
 
 async function handleHelpPage(
   interaction: Parameters<ButtonHandler>[0],

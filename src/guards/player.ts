@@ -1,6 +1,6 @@
-import { findByDiscordId } from "#src/database/repositories/playerRepository.js";
-import type { Player } from "#src/database/repositories/playerRepository.js";
-import type { CommandContext, Guard } from "#src/guards/index.js";
+import { findByDiscordId } from "../database/repositories/playerRepository.js";
+import type { Player } from "../database/repositories/playerRepository.js";
+import type { CommandContext, Guard } from "../guards/index.js";
 
 async function resolvePlayer(ctx: CommandContext): Promise<Player | null> {
   const player = ctx.player ?? (await findByDiscordId(ctx.interaction.user.id));

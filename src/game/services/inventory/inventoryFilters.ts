@@ -1,5 +1,5 @@
-import { CATEGORY_INFO, CATEGORY_ORDER } from "#src/game/data/categories.js";
-import type { ItemCategory } from "#src/game/types.js";
+import { CATEGORY_INFO, CATEGORY_ORDER } from "../game/data/categories.js";
+import type { ItemCategory } from "../game/types.js";
 import type {
   InventoryCategoryView,
   InventoryView,

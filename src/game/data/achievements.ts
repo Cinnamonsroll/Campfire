@@ -1,5 +1,5 @@
-import { ENCOUNTER_TABLES } from "#src/game/data/encounters/index.js";
-import type { AchievementDefinition } from "#src/game/types.js";
+import { ENCOUNTER_TABLES } from "../game/data/encounters/index.js";
+import type { AchievementDefinition } from "../game/types.js";
 
 export const BEACH_ITEM_KEYS: readonly string[] = [
   "seashell",

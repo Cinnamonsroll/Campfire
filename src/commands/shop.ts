@@ -1,15 +1,15 @@
 import { SlashCommandBuilder } from "discord.js";
-import type { Command } from "#src/types/index.js";
-import { logger } from "#src/utils/logger.js";
-import { IS_COMPONENTS_V2 } from "#src/discord/constants.js";
-import { hasCharacter } from "#src/guards/index.js";
-import { todayKey } from "#src/game/utils/date.js";
-import { getShop, toShopCardData } from "#src/game/services/shop/index.js";
-import { generateShopCard } from "#src/images/index.js";
+import type { Command } from "../types/index.js";
+import { logger } from "../utils/logger.js";
+import { IS_COMPONENTS_V2 } from "../discord/constants.js";
+import { hasCharacter } from "../guards/index.js";
+import { todayKey } from "../game/utils/date.js";
+import { getShop, toShopCardData } from "../game/services/shop/index.js";
+import { generateShopCard } from "../images/index.js";
 import {
   buildShopNoticePayload,
   buildShopPayload,
-} from "#src/discord/components/shop/buildShopComponents.js";
+} from "../discord/components/shop/buildShopComponents.js";
 
 const command: Command = {
   data: new SlashCommandBuilder()

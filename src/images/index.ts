@@ -1,7 +1,7 @@
-export { generateCamperCard } from "#src/images/profile/generateProfileCard.js";
-export { generateCampsiteCard } from "#src/images/campsite/generateCampsiteCard.js";
-export { generateShopCard } from "#src/images/shop/generateShopCard.js";
-export { generateStatisticsCard } from "#src/images/statistics/generateStatisticsCard.js";
+export { generateCamperCard } from "../images/profile/generateProfileCard.js";
+export { generateCampsiteCard } from "../images/campsite/generateCampsiteCard.js";
+export { generateShopCard } from "../images/shop/generateShopCard.js";
+export { generateStatisticsCard } from "../images/statistics/generateStatisticsCard.js";
 export type {
   CardData,
   InventorySlot,
@@ -13,4 +13,4 @@ export type {
   ShopItemCardData,
   StatisticCardData,
   StatisticsCardData,
-} from "#src/images/types/index.js";
+} from "../images/types/index.js";

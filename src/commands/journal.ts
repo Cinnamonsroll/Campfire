@@ -1,8 +1,8 @@
 import { SlashCommandBuilder } from "discord.js";
-import type { Command } from "#src/types/index.js";
-import { hasCharacter } from "#src/guards/index.js";
-import { buildJournalReply } from "#src/discord/components/journal/buildJournalView.js";
-import { ALL_FILTER } from "#src/game/services/journal/index.js";
+import type { Command } from "../types/index.js";
+import { hasCharacter } from "../guards/index.js";
+import { buildJournalReply } from "../discord/components/journal/buildJournalView.js";
+import { ALL_FILTER } from "../game/services/journal/index.js";
 
 const command: Command = {
   data: new SlashCommandBuilder()
