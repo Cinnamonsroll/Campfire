@@ -1,4 +1,4 @@
-import type { ItemDefinition } from "../game/types.js";
+import type { ItemDefinition } from "../types.js";
 
 export function getItemDefinition(itemKey: string): ItemDefinition | undefined {
   return ITEMS[itemKey];

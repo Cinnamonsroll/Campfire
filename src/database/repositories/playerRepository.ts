@@ -1,5 +1,5 @@
-import { pool } from "../database/client.js";
-import type { Db } from "../database/db.js";
+import { pool } from "../client.js";
+import type { Db } from "../db.js";
 
 export interface Player {
   id: string;

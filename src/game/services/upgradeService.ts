@@ -1,27 +1,27 @@
-import { pool } from "../database/client.js";
-import type { Db } from "../database/db.js";
+import { pool } from "../../database/client.js";
+import type { Db } from "../../database/db.js";
 import {
   create as createCamp,
   findByPlayerId as findCamp,
   updateLevels,
   type PlayerCamp,
-} from "../database/repositories/campRepository.js";
+} from "../../database/repositories/campRepository.js";
 import {
   findQuantitiesByItemKeys,
   removeItems,
-} from "../database/repositories/inventoryRepository.js";
-import { update as updatePlayer } from "../database/repositories/playerRepository.js";
-import type { Player } from "../database/repositories/playerRepository.js";
-import { addStats } from "../database/repositories/statRepository.js";
-import { withTransaction } from "../database/transaction.js";
-import { CAMP_UPGRADES } from "../game/data/campUpgrades.js";
-import { ITEMS } from "../game/data/items.js";
-import { getBuildingLevel } from "../game/services/campService.js";
+} from "../../database/repositories/inventoryRepository.js";
+import { update as updatePlayer } from "../../database/repositories/playerRepository.js";
+import type { Player } from "../../database/repositories/playerRepository.js";
+import { addStats } from "../../database/repositories/statRepository.js";
+import { withTransaction } from "../../database/transaction.js";
+import { CAMP_UPGRADES } from "../data/campUpgrades.js";
+import { ITEMS } from "../data/items.js";
+import { getBuildingLevel } from "./campService.js";
 import type {
   CampBuildingKey,
   CampUpgradeCostItem,
   CampUpgradeDefinition,
-} from "../game/types.js";
+} from "../types.js";
 
 export type UpgradeErrorKind = "maxed" | "coins" | "items";
 

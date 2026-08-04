@@ -1,31 +1,31 @@
-import { redis } from "../redis/client.js";
-import { RedisKeys } from "../redis/keys.js";
-import { LOCATIONS } from "../game/data/locations.js";
-import { ENCOUNTER_TABLES } from "../game/data/encounters/index.js";
-import { rollEncounter } from "../game/encounters/roll.js";
+import { redis } from "../../redis/client.js";
+import { RedisKeys } from "../../redis/keys.js";
+import { LOCATIONS } from "../data/locations.js";
+import { ENCOUNTER_TABLES } from "../data/encounters/index.js";
+import { rollEncounter } from "../encounters/roll.js";
 import {
   findByDiscordId,
   update as updatePlayer,
-} from "../database/repositories/playerRepository.js";
+} from "../../database/repositories/playerRepository.js";
 import {
   grantRewards,
   StorageFullError,
   type RewardSummary,
-} from "../game/rewards/rewardService.js";
-import { findByPlayerId as findCamp } from "../database/repositories/campRepository.js";
-import { countTotal } from "../database/repositories/inventoryRepository.js";
+} from "../rewards/rewardService.js";
+import { findByPlayerId as findCamp } from "../../database/repositories/campRepository.js";
+import { countTotal } from "../../database/repositories/inventoryRepository.js";
 import {
   applyProgression,
   type ProgressionResult,
-} from "../game/services/progressionService.js";
-import { recordLocationVisit } from "../game/services/statsService.js";
-import { withTransaction } from "../database/transaction.js";
+} from "./progressionService.js";
+import { recordLocationVisit } from "./statsService.js";
+import { withTransaction } from "../../database/transaction.js";
 import {
   getBuildingLevel,
   getStorageCapacity,
-} from "../game/services/campService.js";
-import type { LocationDefinition, EncounterDefinition } from "../game/types.js";
-import type { Player } from "../database/repositories/playerRepository.js";
+} from "./campService.js";
+import type { LocationDefinition, EncounterDefinition } from "../types.js";
+import type { Player } from "../../database/repositories/playerRepository.js";
 
 const ADVENTURE_TTL_SECONDS = 900;
 

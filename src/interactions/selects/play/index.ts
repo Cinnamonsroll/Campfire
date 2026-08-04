@@ -1,15 +1,15 @@
-import type { StringSelectMenuHandler } from "../types/index.js";
-import { PLAY_LOCATION_SELECT_ID } from "../discord/customIds.js";
+import type { StringSelectMenuHandler } from "../../../types/index.js";
+import { PLAY_LOCATION_SELECT_ID } from "../../../discord/customIds.js";
 import {
   buildAdventureResultPayload,
   buildPlayNoticePayload,
-} from "../discord/components/play/buildPlayComponents.js";
+} from "../../../discord/components/play/buildPlayComponents.js";
 import {
   AdventureError,
   runAdventure,
-} from "../game/services/adventureService.js";
-import { assertMessageAuthor } from "../utils/interactionAuthor.js";
-import { logger } from "../utils/logger.js";
+} from "../../../game/services/adventureService.js";
+import { assertMessageAuthor } from "../../../utils/interactionAuthor.js";
+import { logger } from "../../../utils/logger.js";
 
 async function handlePlaySelect(
   interaction: Parameters<StringSelectMenuHandler>[0],

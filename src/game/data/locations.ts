@@ -1,4 +1,4 @@
-import type { LocationDefinition } from "../game/types.js";
+import type { LocationDefinition } from "../types.js";
 
 export const LOCATIONS: Record<string, LocationDefinition> = {
   camp: {

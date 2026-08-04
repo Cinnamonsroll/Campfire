@@ -1,6 +1,6 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
-import { DAILY_CLAIM_PREFIX } from "../discord/customIds.js";
-import type { DailyQuestRow } from "../database/repositories/questRepository.js";
+import { DAILY_CLAIM_PREFIX } from "../../customIds.js";
+import type { DailyQuestRow } from "../../../database/repositories/questRepository.js";
 
 export function buildClaimRow(
   quests: DailyQuestRow[],

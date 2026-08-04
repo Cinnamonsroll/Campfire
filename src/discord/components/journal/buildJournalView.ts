@@ -6,8 +6,8 @@ import {
   type JournalFilter,
   type JournalFilterOption,
   type JournalView,
-} from "../game/services/journal/index.js";
-import type { Player } from "../database/repositories/playerRepository.js";
+} from "../../../game/services/journal/index.js";
+import type { Player } from "../../../database/repositories/playerRepository.js";
 import {
   buildJournalComponents,
   type JournalComponentPayload,

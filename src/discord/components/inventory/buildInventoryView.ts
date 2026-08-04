@@ -1,4 +1,4 @@
-import type { Player } from "../database/repositories/playerRepository.js";
+import type { Player } from "../../../database/repositories/playerRepository.js";
 import {
   buildFilterOptions,
   filterSections,
@@ -7,7 +7,7 @@ import {
   type InventoryFilter,
   type InventoryFilterOption,
   type InventoryView,
-} from "../game/services/inventory/index.js";
+} from "../../../game/services/inventory/index.js";
 import {
   buildInventoryComponents,
   type InventoryComponentPayload,

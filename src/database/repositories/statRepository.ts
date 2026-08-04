@@ -1,6 +1,6 @@
-import { pool } from "../database/client.js";
-import type { Db } from "../database/db.js";
-import type { Player } from "../database/repositories/playerRepository.js";
+import { pool } from "../client.js";
+import type { Db } from "../db.js";
+import type { Player } from "./playerRepository.js";
 
 export type PlayerStatField =
   | "caught_fish"

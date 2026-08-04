@@ -5,7 +5,7 @@ import {
   StringSelectMenuOptionBuilder,
   type Client,
 } from "discord.js";
-import type { ButtonHandler } from "../types/index.js";
+import type { ButtonHandler } from "../../../types/index.js";
 import {
   TRADE_ACCEPT,
   TRADE_ADD,
@@ -13,25 +13,25 @@ import {
   TRADE_DECLINE,
   TRADE_REMOVE,
   tradeItemModalId,
-} from "../discord/components/trade/buildTradeComponents.js";
+} from "../../../discord/components/trade/buildTradeComponents.js";
 import {
   campfireEmbed,
   errorEmbed,
   tradeCompleteEmbed,
   tradeEmbed,
-} from "../embeds/index.js";
-import { buildTradeActionRows } from "../discord/components/trade/buildTradeComponents.js";
+} from "../../../embeds/index.js";
+import { buildTradeActionRows } from "../../../discord/components/trade/buildTradeComponents.js";
 import {
   findById as findTradeById,
   type Trade,
-} from "../database/repositories/tradeRepository.js";
+} from "../../../database/repositories/tradeRepository.js";
 import {
   findByDiscordId,
   findById as findPlayerById,
-} from "../database/repositories/playerRepository.js";
-import { getItemDefinition } from "../game/data/items.js";
-import { isStartingItem } from "../game/data/startingItems.js";
-import { getInventoryView } from "../game/services/inventory/index.js";
+} from "../../../database/repositories/playerRepository.js";
+import { getItemDefinition } from "../../../game/data/items.js";
+import { isStartingItem } from "../../../game/data/startingItems.js";
+import { getInventoryView } from "../../../game/services/inventory/index.js";
 import {
   acceptTrade,
   acceptTradeInvitation,
@@ -39,8 +39,8 @@ import {
   declineTrade,
   getTradeState,
   TradeError,
-} from "../game/services/tradeService.js";
-import { logger } from "../utils/logger.js";
+} from "../../../game/services/tradeService.js";
+import { logger } from "../../../utils/logger.js";
 
 async function getParticipantId(
   interaction: Parameters<ButtonHandler>[0],

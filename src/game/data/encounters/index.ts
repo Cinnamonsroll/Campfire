@@ -1,4 +1,4 @@
-import type { EncounterDefinition } from "../game/types.js";
+import type { EncounterDefinition } from "../../types.js";
 import { BEACH_ENCOUNTERS } from "./beach.js";
 import { CAMP_ENCOUNTERS } from "./camp.js";
 import { CAVE_ENCOUNTERS } from "./cave.js";

@@ -1,4 +1,4 @@
-import type { CampUpgradeDefinition } from "../game/types.js";
+import type { CampUpgradeDefinition } from "../types.js";
 
 export const CAMP_UPGRADES: Record<string, CampUpgradeDefinition> = {
   tent: {

@@ -1,9 +1,9 @@
 import { createCanvas, type SKRSContext2D } from "@napi-rs/canvas";
-import { fillRoundRect } from "../images/shared/canvas.js";
-import { drawEmoji, prefetchEmojis } from "../images/shared/emoji.js";
-import { SCALE, COLORS, withAlpha } from "../images/shared/layout.js";
-import { font } from "../images/shared/typography.js";
-import type { ShopCardData, ShopItemCardData } from "../images/types/index.js";
+import { fillRoundRect } from "../shared/canvas.js";
+import { drawEmoji, prefetchEmojis } from "../shared/emoji.js";
+import { SCALE, COLORS, withAlpha } from "../shared/layout.js";
+import { font } from "../shared/typography.js";
+import type { ShopCardData, ShopItemCardData } from "../types/index.js";
 
 const SHOP_WIDTH = 640 * SCALE;
 const PADDING = 24 * SCALE;

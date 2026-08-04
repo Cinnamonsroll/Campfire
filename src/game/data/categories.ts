@@ -1,4 +1,4 @@
-import type { ItemCategory } from "../game/types.js";
+import type { ItemCategory } from "../types.js";
 
 export interface CategoryInfo {
   label: string;

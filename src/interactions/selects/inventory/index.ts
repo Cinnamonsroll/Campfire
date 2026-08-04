@@ -1,9 +1,9 @@
-import type { StringSelectMenuHandler } from "../types/index.js";
-import { assertMessageAuthor } from "../utils/interactionAuthor.js";
-import { logger } from "../utils/logger.js";
-import { FILTER_SELECT_CUSTOM_ID } from "../discord/components/inventory/inventoryState.js";
-import { parseInventoryFilter } from "../game/services/inventory/index.js";
-import { updateInventory } from "../interactions/inventory/update.js";
+import type { StringSelectMenuHandler } from "../../../types/index.js";
+import { assertMessageAuthor } from "../../../utils/interactionAuthor.js";
+import { logger } from "../../../utils/logger.js";
+import { FILTER_SELECT_CUSTOM_ID } from "../../../discord/components/inventory/inventoryState.js";
+import { parseInventoryFilter } from "../../../game/services/inventory/index.js";
+import { updateInventory } from "../../inventory/update.js";
 
 async function handleFilter(
   interaction: Parameters<StringSelectMenuHandler>[0],

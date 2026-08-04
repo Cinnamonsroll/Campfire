@@ -1,8 +1,8 @@
 import type { SKRSContext2D } from "@napi-rs/canvas";
-import { fillRoundRect, drawProgressBar } from "../images/shared/canvas.js";
-import { SCALE, COLORS } from "../images/shared/layout.js";
-import { font } from "../images/shared/typography.js";
-import type { StatCardData } from "../images/types/index.js";
+import { fillRoundRect, drawProgressBar } from "../shared/canvas.js";
+import { SCALE, COLORS } from "../shared/layout.js";
+import { font } from "../shared/typography.js";
+import type { StatCardData } from "../types/index.js";
 
 export function drawStatCard(
   ctx: SKRSContext2D,

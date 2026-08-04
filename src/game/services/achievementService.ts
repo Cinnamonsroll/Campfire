@@ -1,20 +1,20 @@
-import { pool } from "../database/client.js";
-import type { Db } from "../database/db.js";
+import { pool } from "../../database/client.js";
+import type { Db } from "../../database/db.js";
 import {
   addUnlocked,
   ensureAchievementsByKeys,
   findUnlockedKeysByPlayerId,
-} from "../database/repositories/achievementRepository.js";
-import { findByPlayerId as findCamp } from "../database/repositories/campRepository.js";
-import { findPlayerDiscoveries } from "../database/repositories/discoveryRepository.js";
-import type { Player } from "../database/repositories/playerRepository.js";
-import { countCompletedByPlayerId } from "../database/repositories/questRepository.js";
+} from "../../database/repositories/achievementRepository.js";
+import { findByPlayerId as findCamp } from "../../database/repositories/campRepository.js";
+import { findPlayerDiscoveries } from "../../database/repositories/discoveryRepository.js";
+import type { Player } from "../../database/repositories/playerRepository.js";
+import { countCompletedByPlayerId } from "../../database/repositories/questRepository.js";
 import {
   ACHIEVEMENTS,
   BEACH_ITEM_KEYS,
   JOURNAL_ITEM_KEYS,
-} from "../game/data/achievements.js";
-import type { AchievementDefinition } from "../game/types.js";
+} from "../data/achievements.js";
+import type { AchievementDefinition } from "../types.js";
 
 interface AchievementCounts {
   discoveredKeys: Set<string>;

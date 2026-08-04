@@ -1,4 +1,4 @@
-import { encodeComponentState } from "../discord/components/componentState.js";
+import { encodeComponentState } from "../componentState.js";
 
 const JOURNAL_NAMESPACE = "journal";
 

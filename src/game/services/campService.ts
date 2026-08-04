@@ -1,16 +1,16 @@
-import type { Player } from "../database/repositories/playerRepository.js";
-import type { PlayerCamp } from "../database/repositories/campRepository.js";
-import { findByPlayerId as findCamp } from "../database/repositories/campRepository.js";
-import { countTotal } from "../database/repositories/inventoryRepository.js";
-import { BUILDINGS, COMING_SOON } from "../game/data/buildings.js";
-import { CAMP_UPGRADES } from "../game/data/campUpgrades.js";
-import { ITEMS } from "../game/data/items.js";
+import type { Player } from "../../database/repositories/playerRepository.js";
+import type { PlayerCamp } from "../../database/repositories/campRepository.js";
+import { findByPlayerId as findCamp } from "../../database/repositories/campRepository.js";
+import { countTotal } from "../../database/repositories/inventoryRepository.js";
+import { BUILDINGS, COMING_SOON } from "../data/buildings.js";
+import { CAMP_UPGRADES } from "../data/campUpgrades.js";
+import { ITEMS } from "../data/items.js";
 import type {
   CampBuildingKey,
   CampUpgradeCostItem,
   CampUpgradeDefinition,
-} from "../game/types.js";
-import type { CampsiteCardData } from "../images/types/index.js";
+} from "../types.js";
+import type { CampsiteCardData } from "../../images/types/index.js";
 
 export const CAMP_NAME = "Camp Solstice";
 

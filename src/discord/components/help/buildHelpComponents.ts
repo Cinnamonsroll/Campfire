@@ -7,10 +7,10 @@ import {
   type APIMessageTopLevelComponent,
   type JSONEncodable,
 } from "discord.js";
-import { IS_COMPONENTS_V2 } from "../discord/constants.js";
-import { HELP_PAGE_PREFIX } from "../discord/customIds.js";
-import { CAMPFIRE_ORANGE } from "../embeds/base.js";
-import { markup } from "../utils/markup.js";
+import { IS_COMPONENTS_V2 } from "../../constants.js";
+import { HELP_PAGE_PREFIX } from "../../customIds.js";
+import { CAMPFIRE_ORANGE } from "../../../embeds/base.js";
+import { markup } from "../../../utils/markup.js";
 import { helpPages } from "./helpPages.js";
 
 const PAGE_INDICATOR_ID = `${HELP_PAGE_PREFIX}_indicator`;

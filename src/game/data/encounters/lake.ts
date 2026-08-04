@@ -1,4 +1,4 @@
-import type { EncounterDefinition } from "../game/types.js";
+import type { EncounterDefinition } from "../../types.js";
 
 export const LAKE_ENCOUNTERS: EncounterDefinition[] = [
   {

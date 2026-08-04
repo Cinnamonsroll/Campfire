@@ -1,6 +1,6 @@
 import { createCanvas, loadImage } from "@napi-rs/canvas";
-import { COLORS } from "../images/shared/layout.js";
-import { logger } from "../utils/logger.js";
+import { COLORS } from "./layout.js";
+import { logger } from "../../utils/logger.js";
 
 export interface RGB {
   r: number;

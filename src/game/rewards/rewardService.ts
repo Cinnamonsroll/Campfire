@@ -1,13 +1,13 @@
-import type { Player } from "../database/repositories/playerRepository.js";
-import { update as updatePlayer } from "../database/repositories/playerRepository.js";
-import { pool } from "../database/client.js";
-import { ensureItemsByKeys } from "../database/repositories/itemRepository.js";
-import { addItems } from "../database/repositories/inventoryRepository.js";
-import { addStats } from "../database/repositories/statRepository.js";
-import { withTransaction } from "../database/transaction.js";
-import { grantXp, type GrantXpResult } from "../game/utils/xp.js";
-import { ITEMS } from "../game/data/items.js";
-import type { Db } from "../database/db.js";
+import type { Player } from "../../database/repositories/playerRepository.js";
+import { update as updatePlayer } from "../../database/repositories/playerRepository.js";
+import { pool } from "../../database/client.js";
+import { ensureItemsByKeys } from "../../database/repositories/itemRepository.js";
+import { addItems } from "../../database/repositories/inventoryRepository.js";
+import { addStats } from "../../database/repositories/statRepository.js";
+import { withTransaction } from "../../database/transaction.js";
+import { grantXp, type GrantXpResult } from "../utils/xp.js";
+import { ITEMS } from "../data/items.js";
+import type { Db } from "../../database/db.js";
 
 export interface RewardItemGrant {
   itemKey: string;

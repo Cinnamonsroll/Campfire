@@ -1,5 +1,5 @@
-import { LOCATIONS } from "../game/data/locations.js";
-import type { LocationDefinition } from "../game/types.js";
+import { LOCATIONS } from "../data/locations.js";
+import type { LocationDefinition } from "../types.js";
 
 export function getUnlockedLocations(level: number): LocationDefinition[] {
   return Object.values(LOCATIONS)

@@ -1,9 +1,9 @@
-import type { StringSelectMenuHandler } from "../types/index.js";
-import { assertMessageAuthor } from "../utils/interactionAuthor.js";
-import { logger } from "../utils/logger.js";
-import { FILTER_SELECT_CUSTOM_ID } from "../discord/components/journal/journalState.js";
-import { parseJournalFilter } from "../game/services/journal/index.js";
-import { updateJournal } from "../interactions/journal/update.js";
+import type { StringSelectMenuHandler } from "../../../types/index.js";
+import { assertMessageAuthor } from "../../../utils/interactionAuthor.js";
+import { logger } from "../../../utils/logger.js";
+import { FILTER_SELECT_CUSTOM_ID } from "../../../discord/components/journal/journalState.js";
+import { parseJournalFilter } from "../../../game/services/journal/index.js";
+import { updateJournal } from "../../journal/update.js";
 
 async function handleFilter(
   interaction: Parameters<StringSelectMenuHandler>[0],

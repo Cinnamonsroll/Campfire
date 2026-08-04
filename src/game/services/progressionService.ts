@@ -1,18 +1,18 @@
-import { pool } from "../database/client.js";
-import type { Db } from "../database/db.js";
-import type { DailyQuestRow } from "../database/repositories/questRepository.js";
-import type { Player } from "../database/repositories/playerRepository.js";
+import { pool } from "../../database/client.js";
+import type { Db } from "../../database/db.js";
+import type { DailyQuestRow } from "../../database/repositories/questRepository.js";
+import type { Player } from "../../database/repositories/playerRepository.js";
 import {
   grantRewards,
   type RewardSummary,
-} from "../game/rewards/rewardService.js";
-import { evaluateAchievements } from "../game/services/achievementService.js";
+} from "../rewards/rewardService.js";
+import { evaluateAchievements } from "./achievementService.js";
 import {
   recordDailyProgress,
   type ProgressionEvents,
-} from "../game/services/dailyQuestService.js";
-import { recordDiscoveries } from "../game/services/journal/index.js";
-import type { AchievementDefinition, ItemDefinition } from "../game/types.js";
+} from "./dailyQuestService.js";
+import { recordDiscoveries } from "./journal/index.js";
+import type { AchievementDefinition, ItemDefinition } from "../types.js";
 
 export interface ProgressionResult {
   questsCompleted: DailyQuestRow[];

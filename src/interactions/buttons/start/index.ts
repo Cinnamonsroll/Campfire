@@ -4,10 +4,10 @@ import {
   TextInputBuilder,
   TextInputStyle,
 } from "discord.js";
-import type { ButtonHandler } from "../types/index.js";
-import { locationVignette } from "../embeds/index.js";
-import { logger } from "../utils/logger.js";
-import { assertMessageAuthor } from "../utils/interactionAuthor.js";
+import type { ButtonHandler } from "../../../types/index.js";
+import { locationVignette } from "../../../embeds/index.js";
+import { logger } from "../../../utils/logger.js";
+import { assertMessageAuthor } from "../../../utils/interactionAuthor.js";
 
 async function handleContinue(
   interaction: Parameters<ButtonHandler>[0],
