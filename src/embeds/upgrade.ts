@@ -22,7 +22,7 @@ export function upgradeResultEmbed(
       markup.bold("🏅 Achievement"),
       ...achievements.map(
         (achievement) =>
-          `${achievement.emoji} ${achievement.name} — +${String(achievement.rewardCoins)} coins`,
+          `${achievement.emoji} ${achievement.name} ../ +${String(achievement.rewardCoins)} coins`,
       ),
     );
   }

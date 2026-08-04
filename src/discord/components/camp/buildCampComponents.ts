@@ -43,7 +43,7 @@ export function buildUpgradeSelect(
     const next = building.levels[currentLevel - 1];
 
     const label = maxed
-      ? `${building.name} — Max Level`
+      ? `${building.name} · Max Level`
       : `${building.name} · Next: ${String(currentLevel + 1)}`;
     const description = maxed
       ? building.description
@@ -151,7 +151,7 @@ export function buildUpgradeResultContainer(
       markup.bold("🏅 Achievement"),
       ...achievements.map(
         (achievement) =>
-          `${achievement.emoji} ${achievement.name} — +${String(achievement.rewardCoins)} coins`,
+          `${achievement.emoji} ${achievement.name} · +${String(achievement.rewardCoins)} coins`,
       ),
     );
   }

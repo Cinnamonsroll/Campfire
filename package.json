@@ -2,7 +2,7 @@
   "name": "campfire",
   "version": "0.1.0",
   "private": true,
-  "description": "Campfire — a Discord RPG bot",
+  "description": "Campfire · a Discord RPG bot",
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",

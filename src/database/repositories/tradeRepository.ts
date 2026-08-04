@@ -17,7 +17,7 @@ export interface Trade {
   created_at: Date;
 }
 
-/** Item quantities keyed by item key — offers are fungible per item key. */
+/** Item quantities keyed by item key · offers are fungible per item key. */
 export type TradeItems = Record<string, number>;
 
 export interface TradeOffer {

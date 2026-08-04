@@ -79,7 +79,7 @@ async function drawUpgradeCard(
     );
     pillY += pillHeight + pillGap;
   } else if (upgrade.costItems.length === 0) {
-    await drawCostPill(ctx, "🪙", "—", pillX, pillY, pillWidth, pillHeight);
+    await drawCostPill(ctx, "🪙", "·", pillX, pillY, pillWidth, pillHeight);
     pillY += pillHeight + pillGap;
   }
 

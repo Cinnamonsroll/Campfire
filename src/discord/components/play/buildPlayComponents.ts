@@ -204,7 +204,7 @@ export function buildAdventureResultPayload(
         markup.bold("🏅 Achievements"),
         progression.achievements.map(
           (achievement) =>
-            `${achievement.emoji} ${achievement.name} — +${String(achievement.rewardCoins)} coins`,
+            `${achievement.emoji} ${achievement.name} · +${String(achievement.rewardCoins)} coins`,
         ),
       ),
     );
