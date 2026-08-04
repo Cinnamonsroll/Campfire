@@ -2,16 +2,14 @@ FROM node:22-bookworm-slim AS build
 
 WORKDIR /app
 
-RUN corepack enable
-
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+COPY package.json package-lock.json ./
+RUN npm ci
 
 COPY tsconfig.json ./
 COPY src ./src
-RUN pnpm build \
+RUN npm run build \
   && printf '{"type":"module","imports":{"#/*":"./*"}}\n' > dist/package.json \
-  && pnpm prune --prod
+  && npm prune --omit=dev
 
 FROM node:22-bookworm-slim AS runtime
 

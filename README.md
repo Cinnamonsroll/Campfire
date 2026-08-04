@@ -5,8 +5,8 @@ A Discord RPG bot - gather around the fire.
 ## Setup
 
 ```bash
-pnpm install
-pnpm dev
+npm install
+npm dev
 ```
 
 ## Environment Variables
@@ -39,9 +39,9 @@ Copy `.env.example` to `.env` and fill in:
 ## Development
 
 ```bash
-pnpm dev        # Start with hot reload
-pnpm build      # Compile TypeScript
-pnpm start      # Run compiled output
-pnpm lint       # Check code style
-pnpm format     # Format code with Prettier
+npm dev        # Start with hot reload
+npm build      # Compile TypeScript
+npm start      # Run compiled output
+npm lint       # Check code style
+npm format     # Format code with Prettier
 ```
