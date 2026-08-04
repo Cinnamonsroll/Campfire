@@ -8,7 +8,6 @@ RUN npm ci
 COPY tsconfig.json ./
 COPY src ./src
 RUN npm run build \
-  && printf '{"type":"module","imports":{"#/*":"./*"}}\n' > dist/package.json \
   && npm prune --omit=dev
 
 FROM node:22-bookworm-slim AS runtime
