@@ -17,7 +17,9 @@ import { connectRedis, disconnectRedis } from "./redis/client.js";
 import { logger } from "./utils/logger.js";
 import { loadCommands } from "./utils/loaders/commands.js";
 import { loadEvents } from "./utils/loaders/events.js";
-import { join } from "node:path";
+import { join, dirname } from "node:path";
+import { GlobalFonts } from "@napi-rs/canvas";
+import { fileURLToPath } from "node:url";
 import {
   loadInteractionHandlers,
   interactionsDir,
@@ -60,6 +62,11 @@ async function main(): Promise<void> {
   const rest = new REST().setToken(env.DISCORD_TOKEN);
 
   try {
+    const __dirname = dirname(fileURLToPath(import.meta.url));
+    GlobalFonts.registerFromPath(
+      join(__dirname, "images", "assets", "fonts", "SegoeUI.ttf"),
+      "Segoe UI",
+    );
     logger.info("Registering global slash commands");
     await rest.put(Routes.applicationCommands(env.CLIENT_ID), {
       body: commands.map((cmd) => cmd.data.toJSON()),
