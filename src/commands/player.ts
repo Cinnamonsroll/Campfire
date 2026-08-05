@@ -44,7 +44,7 @@ const command: Command = {
     try {
       const avatarUrl = targetUser.displayAvatarURL({
         extension: "png",
-        size: 1024,
+        size: 512,
         forceStatic: true,
       });
 

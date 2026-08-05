@@ -27,8 +27,6 @@ import { withTransaction } from "../../database/transaction.js";
 import { getItemDefinition } from "../data/items.js";
 import { isStartingItem } from "../data/startingItems.js";
 
-export const TRADE_TTL_MINUTES = 5;
-
 export class TradeError extends Error {}
 
 function firstItem<T>(rows: readonly T[]): T | undefined {
@@ -55,7 +53,7 @@ export interface TradeExchangeSummary {
   receiverGives: { coins: number; items: TradeItems };
 }
 
-export interface AcceptResult {
+interface AcceptResult {
   trade: Trade;
   executed: boolean;
   summary: TradeExchangeSummary | null;
@@ -351,7 +349,7 @@ async function transferOffer(
   }
 }
 
-export async function executeTrade(
+async function executeTrade(
   tradeId: string,
   db: Db,
 ): Promise<TradeExchangeSummary> {

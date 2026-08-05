@@ -71,9 +71,3 @@ export const STATISTIC_DEFINITIONS: readonly StatisticDefinition[] = [
     sortOrder: 9,
   },
 ] as const;
-
-export function getStatisticDefinition(
-  key: string,
-): StatisticDefinition | undefined {
-  return STATISTIC_DEFINITIONS.find((definition) => definition.key === key);
-}

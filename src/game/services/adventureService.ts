@@ -19,6 +19,10 @@ import {
   type ProgressionResult,
 } from "./progressionService.js";
 import { recordLocationVisit } from "./statsService.js";
+import {
+  consumeAdventureBuff,
+  getBuffXpMultiplier,
+} from "./buffService.js";
 import { withTransaction } from "../../database/transaction.js";
 import {
   getBuildingLevel,
@@ -122,6 +126,7 @@ export async function runAdventure(
             items: encounter.rewards.items,
             energyAfter,
             capacity,
+            xpMultiplier: await getBuffXpMultiplier(player.id, db),
           },
           db,
         );
@@ -132,6 +137,8 @@ export async function runAdventure(
         }
         throw error;
       }
+
+      await consumeAdventureBuff(player.id, db);
 
       player.total_adventures += 1;
       await updatePlayer(

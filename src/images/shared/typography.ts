@@ -1,4 +1,4 @@
-export const FONT = "Segoe UI";
+const FONT = "Segoe UI";
 
 export function font(
   size: number,

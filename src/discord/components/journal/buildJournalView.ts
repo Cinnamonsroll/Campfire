@@ -18,7 +18,7 @@ const DEFAULT_OWNER_NAME = "Camper";
 export type JournalRenderModel =
   EmptyJournalRenderModel | FilledJournalRenderModel;
 
-export interface EmptyJournalRenderModel {
+interface EmptyJournalRenderModel {
   readonly kind: "empty";
   readonly ownerName: string;
 }
@@ -33,7 +33,7 @@ export interface FilledJournalRenderModel {
   readonly filterOptions: readonly JournalFilterOption[];
 }
 
-export function buildJournalView(
+function buildJournalView(
   view: JournalView,
   filter: JournalFilter,
 ): JournalRenderModel {

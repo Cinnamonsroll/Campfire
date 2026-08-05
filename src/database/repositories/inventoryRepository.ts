@@ -1,7 +1,7 @@
 import { pool } from "../client.js";
 import type { Db } from "../db.js";
 
-export interface InventoryEntry {
+interface InventoryEntry {
   id: string;
   player_id: string;
   item_id: string;
@@ -63,7 +63,7 @@ export async function countTotal(
   return Number(result.rows[0]?.total ?? 0);
 }
 
-export interface ItemQuantity {
+interface ItemQuantity {
   itemId: string;
   itemKey: string;
   quantity: number;

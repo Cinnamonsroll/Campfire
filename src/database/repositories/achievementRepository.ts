@@ -1,7 +1,7 @@
 import { pool } from "../client.js";
 import type { Db } from "../db.js";
 
-export interface AchievementRow {
+interface AchievementRow {
   id: string;
   achievement_key: string;
 }
@@ -52,15 +52,4 @@ export async function addUnlocked(
     [playerId, achievementIds],
   );
   return result.rows.map((row) => row.achievement_id);
-}
-
-export async function countUnlockedByPlayerId(
-  playerId: string,
-  db: Db = pool,
-): Promise<number> {
-  const result = await db.query<{ count: string }>(
-    `SELECT COUNT(*) AS count FROM player_achievements WHERE player_id = $1`,
-    [playerId],
-  );
-  return Number(result.rows[0]?.count ?? 0);
 }

@@ -11,7 +11,9 @@ const HEADER_HEIGHT = 110 * SCALE;
 const FOOTER_HEIGHT = 40 * SCALE;
 
 const GRID_COLS = 4;
+const GRID_ROWS = 2;
 const GRID_GAP = 12 * SCALE;
+const SHOP_SLOT_COUNT = GRID_COLS * GRID_ROWS;
 
 const TILE_WIDTH =
   (SHOP_WIDTH - PADDING * 2 - GRID_GAP * (GRID_COLS - 1)) / GRID_COLS;
@@ -27,6 +29,7 @@ const RARITY_BG = {
 
 const ENERGY_BG = "#FFF3CF";
 const SOLD_OUT_LABEL = "Sold out";
+const EMPTY_SLOT_EMOJI = "🔒";
 
 function itemBackground(item: ShopItemCardData): string {
   if (item.isEnergyItem) return ENERGY_BG;
@@ -170,6 +173,38 @@ async function drawShopItemTile(
   }
 }
 
+async function drawShopEmptyTile(
+  ctx: SKRSContext2D,
+  x: number,
+  y: number,
+): Promise<void> {
+  fillRoundRect(
+    ctx,
+    x,
+    y,
+    TILE_WIDTH,
+    TILE_HEIGHT,
+    10 * SCALE,
+    withAlpha(COLORS.lockedBg, 0.05),
+  );
+
+  const centerX = x + TILE_WIDTH / 2;
+  const emojiSize = 28 * SCALE;
+  await drawEmoji(
+    ctx,
+    EMPTY_SLOT_EMOJI,
+    centerX - emojiSize / 2,
+    y + 34 * SCALE,
+    emojiSize,
+  );
+
+  ctx.font = font(10 * SCALE);
+  ctx.fillStyle = COLORS.mutedLight;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  ctx.fillText(SOLD_OUT_LABEL, centerX, y + 72 * SCALE);
+}
+
 export async function generateShopCard(data: ShopCardData): Promise<Buffer> {
   await Promise.all([
     prefetchEmojis(
@@ -177,6 +212,7 @@ export async function generateShopCard(data: ShopCardData): Promise<Buffer> {
       28 * SCALE,
     ),
     prefetchEmojis(["🪙"], 10 * SCALE),
+    prefetchEmojis([EMPTY_SLOT_EMOJI], 28 * SCALE),
   ]);
 
   const canvas = createCanvas(SHOP_WIDTH, CARD_HEIGHT);
@@ -227,12 +263,16 @@ export async function generateShopCard(data: ShopCardData): Promise<Buffer> {
   const gridX = PADDING;
   const gridY = PADDING + HEADER_HEIGHT;
 
-  for (let index = 0; index < data.items.length; index++) {
+  for (let index = 0; index < SHOP_SLOT_COUNT; index++) {
     const col = index % GRID_COLS;
     const row = Math.floor(index / GRID_COLS);
     const x = gridX + col * (TILE_WIDTH + GRID_GAP);
     const y = gridY + row * (TILE_HEIGHT + GRID_GAP);
-    await drawShopItemTile(ctx, data.items[index], x, y);
+    if (index < data.items.length) {
+      await drawShopItemTile(ctx, data.items[index], x, y);
+    } else {
+      await drawShopEmptyTile(ctx, x, y);
+    }
   }
 
   ctx.font = font(11 * SCALE);

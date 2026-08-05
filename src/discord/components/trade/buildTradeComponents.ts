@@ -2,7 +2,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 import { encodeComponentState } from "../componentState.js";
 import type { TradeState } from "../../../game/services/tradeService.js";
 
-export const TRADE_PREFIX = "trade";
+const TRADE_PREFIX = "trade";
 export const TRADE_ACCEPT = "accept";
 export const TRADE_DECLINE = "decline";
 export const TRADE_ADD = "add";
@@ -12,32 +12,24 @@ export const TRADE_ADD_ITEM = "add_item";
 export const TRADE_REMOVE_ITEM = "remove_item";
 export const TRADE_ITEM_MODAL = "item_modal";
 
-export function tradeAcceptId(tradeId: string): string {
+function tradeAcceptId(tradeId: string): string {
   return encodeComponentState([TRADE_PREFIX, TRADE_ACCEPT, tradeId]);
 }
 
-export function tradeDeclineId(tradeId: string): string {
+function tradeDeclineId(tradeId: string): string {
   return encodeComponentState([TRADE_PREFIX, TRADE_DECLINE, tradeId]);
 }
 
-export function tradeAddId(tradeId: string): string {
+function tradeAddId(tradeId: string): string {
   return encodeComponentState([TRADE_PREFIX, TRADE_ADD, tradeId]);
 }
 
-export function tradeRemoveId(tradeId: string): string {
+function tradeRemoveId(tradeId: string): string {
   return encodeComponentState([TRADE_PREFIX, TRADE_REMOVE, tradeId]);
 }
 
-export function tradeCoinsId(tradeId: string, delta: number): string {
+function tradeCoinsId(tradeId: string, delta: number): string {
   return encodeComponentState([TRADE_PREFIX, TRADE_COINS, delta, tradeId]);
-}
-
-export function tradeAddItemId(tradeId: string): string {
-  return encodeComponentState([TRADE_PREFIX, TRADE_ADD_ITEM, tradeId]);
-}
-
-export function tradeRemoveItemId(tradeId: string): string {
-  return encodeComponentState([TRADE_PREFIX, TRADE_REMOVE_ITEM, tradeId]);
 }
 
 export function tradeItemModalId(

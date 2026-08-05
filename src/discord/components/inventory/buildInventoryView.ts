@@ -18,7 +18,7 @@ const DEFAULT_OWNER_NAME = "Camper";
 export type InventoryRenderModel =
   EmptyInventoryRenderModel | FilledInventoryRenderModel;
 
-export interface EmptyInventoryRenderModel {
+interface EmptyInventoryRenderModel {
   readonly kind: "empty";
   readonly ownerName: string;
 }
@@ -31,7 +31,7 @@ export interface FilledInventoryRenderModel {
   readonly filterOptions: readonly InventoryFilterOption[];
 }
 
-export function buildInventoryView(
+function buildInventoryView(
   view: InventoryView,
   filter: InventoryFilter,
 ): InventoryRenderModel {

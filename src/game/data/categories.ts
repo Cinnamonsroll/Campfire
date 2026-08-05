@@ -1,6 +1,6 @@
 import type { ItemCategory } from "../types.js";
 
-export interface CategoryInfo {
+interface CategoryInfo {
   label: string;
   emoji: string;
 }

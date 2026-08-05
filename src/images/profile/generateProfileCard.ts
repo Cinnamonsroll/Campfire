@@ -1,10 +1,6 @@
 import { createCanvas } from "@napi-rs/canvas";
 import type { CardData } from "../types/index.js";
-import {
-  darken,
-  extractHeaderColor,
-  rgbString,
-} from "../shared/colors.js";
+import { darken, extractHeaderColor, rgbString } from "../shared/colors.js";
 import {
   roundRect,
   drawAvatar,
@@ -15,6 +11,7 @@ import {
   drawRemainingXP,
   drawInventorySlot,
   drawEmptySlot,
+  loadImageCached,
 } from "../shared/canvas.js";
 import { prefetchEmojis } from "../shared/emoji.js";
 import { SCALE, COLORS, withAlpha } from "../shared/layout.js";
@@ -99,16 +96,15 @@ function computeLayout(): LayoutMetrics {
 }
 
 export async function generateCamperCard(data: CardData): Promise<Buffer> {
-  await prefetchEmojis(
-    data.inventory.map((item) => item.emoji),
-    20 * SCALE,
-  );
-
   const layout = computeLayout();
-  const headerColor = await extractHeaderColor(
-    data.avatarUrl,
-    data.accentColor,
-  );
+  const [headerColor] = await Promise.all([
+    extractHeaderColor(data.avatarUrl, data.accentColor),
+    prefetchEmojis(
+      data.inventory.map((item) => item.emoji),
+      20 * SCALE,
+    ),
+    loadImageCached(data.avatarUrl),
+  ]);
   const headerColorString = rgbString(headerColor);
 
   const canvas = createCanvas(CARD_WIDTH, layout.cardHeight);

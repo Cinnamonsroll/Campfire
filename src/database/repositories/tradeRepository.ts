@@ -1,7 +1,7 @@
 import { pool } from "../client.js";
 import type { Db } from "../db.js";
 
-export type TradeStatus =
+type TradeStatus =
   "pending" | "accepted" | "declined" | "cancelled" | "completed";
 
 export interface Trade {
@@ -56,17 +56,6 @@ export async function findById(
     id,
   ]);
   return result.rows[0] ?? null;
-}
-
-export async function findByPlayerId(
-  playerId: string,
-  db: Db = pool,
-): Promise<Trade[]> {
-  const result = await db.query<Trade>(
-    `SELECT * FROM trades WHERE sender_id = $1 OR receiver_id = $1 ORDER BY created_at DESC`,
-    [playerId],
-  );
-  return result.rows;
 }
 
 export async function findActiveBetween(
@@ -164,7 +153,7 @@ export async function ensureOffer(
   throw new Error(`Unable to create trade offer for ${playerId}`);
 }
 
-export async function findOffer(
+async function findOffer(
   tradeId: string,
   playerId: string,
   db: Db = pool,

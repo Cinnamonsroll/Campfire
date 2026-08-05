@@ -23,7 +23,7 @@ import type {
   CampUpgradeDefinition,
 } from "../types.js";
 
-export type UpgradeErrorKind = "maxed" | "coins" | "items";
+type UpgradeErrorKind = "maxed" | "coins" | "items";
 
 export class UpgradeError extends Error {
   readonly kind: UpgradeErrorKind;

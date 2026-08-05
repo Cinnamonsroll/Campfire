@@ -18,7 +18,7 @@ export interface ProgressionEvents {
   adventures?: number;
 }
 
-export interface DailyQuestCache {
+interface DailyQuestCache {
   date: string;
   keys: string[];
 }
@@ -35,7 +35,7 @@ function fnv1a(str: string): number {
   return hash >>> 0;
 }
 
-export function pickDailyKeys(discordId: string, date: string): string[] {
+function pickDailyKeys(discordId: string, date: string): string[] {
   const questKeys = Object.keys(QUESTS);
   let seed = fnv1a(`${discordId}:${date}`);
   const chosen: string[] = [];
@@ -53,7 +53,7 @@ export function pickDailyKeys(discordId: string, date: string): string[] {
   return chosen;
 }
 
-export async function getDailyQuestKeys(
+async function getDailyQuestKeys(
   discordId: string,
   date: string,
 ): Promise<string[]> {
@@ -119,7 +119,7 @@ export async function getDailyQuests(
   return findDailyByPlayerId(playerId, date, db);
 }
 
-export function questDelta(
+function questDelta(
   quest: DailyQuestRow,
   events: ProgressionEvents,
 ): number {
@@ -171,7 +171,7 @@ export async function recordDailyProgress(
   return completedNow;
 }
 
-export interface DailyClaimResult {
+interface DailyClaimResult {
   quest: PlayerQuest;
   summary: RewardSummary;
 }

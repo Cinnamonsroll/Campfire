@@ -1,6 +1,7 @@
 import { loadImage, type SKRSContext2D } from "@napi-rs/canvas";
 import { parse } from "@twemoji/parser";
 
+const parseCache = new Map<string, ReturnType<typeof parse>>();
 const svgCache = new Map<string, string>();
 const imageCache = new Map<
   string,
@@ -22,8 +23,12 @@ async function loadEmoji(
   emoji: string,
   size: number,
 ): Promise<Awaited<ReturnType<typeof loadImage>> | null> {
-  const entities = parse(emoji);
-  if (entities.length === 0) return null;
+  let entities = parseCache.get(emoji);
+  if (!entities) {
+    entities = parse(emoji);
+    if (entities.length === 0) return null;
+    parseCache.set(emoji, entities);
+  }
 
   const url = entities[0].url;
   const cacheKey = `${url}@${String(size)}`;

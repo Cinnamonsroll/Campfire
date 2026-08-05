@@ -1,7 +1,11 @@
 import type { ModalHandler } from "../../../types/index.js";
 import { MessageFlags } from "discord.js";
 import { logger } from "../../../utils/logger.js";
-import { errorEmbed, campfireEmbed, welcomeCeremony } from "../../../embeds/index.js";
+import {
+  errorEmbed,
+  campfireEmbed,
+  welcomeCeremony,
+} from "../../../embeds/index.js";
 import { generateCamperCard } from "../../../images/index.js";
 import {
   findByDiscordId,
@@ -53,7 +57,7 @@ async function handleNameSubmit(
 
     const avatarUrl = interaction.user.displayAvatarURL({
       extension: "png",
-      size: 1024,
+      size: 512,
       forceStatic: true,
     });
 

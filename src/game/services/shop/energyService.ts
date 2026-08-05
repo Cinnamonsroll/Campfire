@@ -10,11 +10,11 @@ import {
 } from "../../../database/repositories/playerRepository.js";
 import { getBuildingLevel, getMaxEnergy } from "../campService.js";
 
-export const ENERGY_RESTORE_HOURS = 12;
+const ENERGY_RESTORE_HOURS = 12;
 
 const ENERGY_RESTORE_MS = ENERGY_RESTORE_HOURS * 60 * 60 * 1000;
 
-export function maxEnergyForCamp(camp: PlayerCamp | null): number {
+function maxEnergyForCamp(camp: PlayerCamp | null): number {
   return getMaxEnergy(getBuildingLevel(camp, "tent"));
 }
 

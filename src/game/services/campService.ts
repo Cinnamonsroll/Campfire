@@ -14,13 +14,13 @@ import type { CampsiteCardData } from "../../images/types/index.js";
 
 export const CAMP_NAME = "Camp Solstice";
 
-export const MAX_ENERGY_BASE = 100;
-export const ENERGY_PER_TENT_LEVEL = 10;
-export const STORAGE_BASE_CAPACITY = 40;
-export const STORAGE_PER_STORAGE_LEVEL = 20;
-export const XP_BOOST_PER_CAMPFIRE_LEVEL = 0.05;
+const MAX_ENERGY_BASE = 100;
+const ENERGY_PER_TENT_LEVEL = 10;
+const STORAGE_BASE_CAPACITY = 40;
+const STORAGE_PER_STORAGE_LEVEL = 20;
+const XP_BOOST_PER_CAMPFIRE_LEVEL = 0.05;
 
-export const BUILDING_ORDER: readonly CampBuildingKey[] = [
+const BUILDING_ORDER: readonly CampBuildingKey[] = [
   "tent",
   "campfire",
   "storage",
@@ -41,7 +41,7 @@ export function getBuildingLevel(
   }
 }
 
-export function getCampLevel(camp: PlayerCamp | null): number {
+function getCampLevel(camp: PlayerCamp | null): number {
   if (!camp) return 1;
   return camp.tent_level + camp.campfire_level + camp.storage_level - 2;
 }
@@ -58,7 +58,7 @@ export function getXpMultiplier(campfireLevel: number): number {
   return 1 + (campfireLevel - 1) * XP_BOOST_PER_CAMPFIRE_LEVEL;
 }
 
-export interface NextUpgradeInfo {
+interface NextUpgradeInfo {
   building: CampUpgradeDefinition;
   currentLevel: number;
   nextLevel: number;
@@ -67,7 +67,7 @@ export interface NextUpgradeInfo {
   effect: string;
 }
 
-export function getNextUpgrade(
+function getNextUpgrade(
   camp: PlayerCamp | null,
 ): NextUpgradeInfo | null {
   for (const key of BUILDING_ORDER) {

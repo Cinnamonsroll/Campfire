@@ -29,12 +29,12 @@ import { markup } from "../../../utils/markup.js";
 
 const CAMP_CARD_ATTACHMENT = "attachment://campsite_card.png";
 
-export interface CampsiteComponentPayload {
+interface CampsiteComponentPayload {
   readonly components: JSONEncodable<APIMessageTopLevelComponent>[];
   readonly flags: number;
 }
 
-export function buildUpgradeSelect(
+function buildUpgradeSelect(
   camp: PlayerCamp,
 ): ActionRowBuilder<StringSelectMenuBuilder> {
   const options = Object.values(CAMP_UPGRADES).map((building) => {
@@ -66,7 +66,7 @@ export function buildUpgradeSelect(
   });
 }
 
-export function buildCampsiteContainer(
+function buildCampsiteContainer(
   characterName: string,
   camp: PlayerCamp | null,
 ): ContainerBuilder {

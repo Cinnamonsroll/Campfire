@@ -6,7 +6,6 @@ import { generateStatisticsCard } from "../images/index.js";
 import { Command } from "../types/index.js";
 import { logger } from "../utils/loaders/index.js";
 
-
 const command: Command = {
   data: new SlashCommandBuilder()
     .setName("statistics")
@@ -40,7 +39,11 @@ const command: Command = {
     try {
       const values = await getStatistics(player);
       const cardBuffer = await generateStatisticsCard({
-        avatarUrl: targetUser.displayAvatarURL({ size: 256 }),
+        avatarUrl: targetUser.displayAvatarURL({
+          extension: "png",
+          size: 512,
+          forceStatic: true,
+        }),
         characterName: player.character_name ?? targetUser.username,
         accentColor: targetUser.accentColor,
         statistics: values.map(({ definition, value }) => ({

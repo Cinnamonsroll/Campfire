@@ -1,7 +1,7 @@
 import { pool } from "../client.js";
 import type { Db } from "../db.js";
 
-export interface ShopPurchaseRow {
+interface ShopPurchaseRow {
   id: string;
   player_id: string;
   date: string;

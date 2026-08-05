@@ -23,12 +23,12 @@ import { CAMPFIRE_ORANGE } from "../../../embeds/base.js";
 import { markup } from "../../../utils/markup.js";
 import type { ShopItemView, ShopView } from "../../../game/services/shop/index.js";
 
-export interface ShopComponentPayload {
+interface ShopComponentPayload {
   readonly components: JSONEncodable<APIMessageTopLevelComponent>[];
   readonly flags: number;
 }
 
-export interface ShopPending {
+interface ShopPending {
   itemKey: string;
 }
 

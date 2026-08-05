@@ -34,12 +34,12 @@ export interface LocationDefinition {
   unlockText: string;
 }
 
-export interface EncounterItemReward {
+interface EncounterItemReward {
   itemKey: string;
   quantity: number;
 }
 
-export interface EncounterRewards {
+interface EncounterRewards {
   xp: number;
   coins: number;
   items: EncounterItemReward[];
@@ -56,9 +56,9 @@ export interface EncounterDefinition {
   rewards: EncounterRewards;
 }
 
-export type QuestType = "collect" | "visit" | "xp" | "adventure";
+type QuestType = "collect" | "visit" | "xp" | "adventure";
 
-export interface QuestReward {
+interface QuestReward {
   xp: number;
   coins: number;
 }
@@ -85,13 +85,6 @@ export interface LootTable {
   entries: LootEntry[];
 }
 
-export interface PetDefinition {
-  key: string;
-  name: string;
-  description: string;
-  emoji: string;
-}
-
 export type CampBuildingKey = "tent" | "campfire" | "storage";
 
 export interface CampUpgradeCostItem {
@@ -99,7 +92,7 @@ export interface CampUpgradeCostItem {
   quantity: number;
 }
 
-export interface CampUpgradeLevel {
+interface CampUpgradeLevel {
   costCoins: number;
   costItems: CampUpgradeCostItem[];
   effect: string;
@@ -114,7 +107,7 @@ export interface CampUpgradeDefinition {
   levels: CampUpgradeLevel[];
 }
 
-export type AchievementType =
+type AchievementType =
   | "level"
   | "adventure"
   | "discovery"

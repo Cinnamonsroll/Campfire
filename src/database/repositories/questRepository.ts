@@ -1,7 +1,7 @@
 import { pool } from "../client.js";
 import type { Db } from "../db.js";
 
-export interface QuestRow {
+interface QuestRow {
   id: string;
   quest_key: string;
   title: string | null;
@@ -26,7 +26,7 @@ export interface PlayerQuest {
 
 export interface DailyQuestRow extends PlayerQuest, QuestRow {}
 
-export interface QuestDefinitionInput {
+interface QuestDefinitionInput {
   quest_key: string;
   title: string;
   description: string;

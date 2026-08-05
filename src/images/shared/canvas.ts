@@ -13,7 +13,7 @@ export function loadImageCached(
 ): Promise<Awaited<ReturnType<typeof loadImage>>> {
   let promise = imageCache.get(url);
   if (!promise) {
-    promise = loadImage(url).catch((error) => {
+    promise = loadImage(url).catch((error: unknown) => {
       imageCache.delete(url);
       throw error;
     });

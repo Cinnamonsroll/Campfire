@@ -25,6 +25,7 @@ Copy `.env.example` to `.env` and fill in:
 
 - `/start` - Begin your summer at Camp Solstice
 - `/play` - Set out on a new adventure
+- `/game` - Specialized activities: `fish`, `gather`, `cook`, `catch`, `photograph`
 - `/camp [user]` - View your campsite or another camper's
 - `/inventory` - Browse everything you've collected
 - `/journal` - Browse your field journal of discoveries

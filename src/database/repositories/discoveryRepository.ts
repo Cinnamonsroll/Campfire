@@ -1,12 +1,12 @@
 import { pool } from "../client.js";
 import type { Db } from "../db.js";
 
-export interface DiscoveryRow {
+interface DiscoveryRow {
   id: string;
   discovery_key: string;
 }
 
-export interface PlayerDiscovery {
+interface PlayerDiscovery {
   discovery_key: string;
   found_at: Date;
 }

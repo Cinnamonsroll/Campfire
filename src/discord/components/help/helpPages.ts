@@ -1,6 +1,6 @@
 import { markup } from "../../../utils/markup.js";
 
-export interface HelpPage {
+interface HelpPage {
   emoji: string;
   title: string;
   content: string;
@@ -24,6 +24,10 @@ const getStartedPage: HelpPage = {
     commandLine(
       "/play",
       "Pick a trail and head out. Adventures cost energy and reward XP, coins, and items.",
+    ),
+    commandLine(
+      "/game",
+      "Specialized activities: fish, gather, cook, catch, and photograph for extra rewards.",
     ),
     commandLine(
       "/camp",
@@ -50,6 +54,12 @@ const getStartedPage: HelpPage = {
       "Swap items and coins with another camper at the Trading Post.",
     ),
     commandLine("/statistics", "Review your lifetime stats as a camper."),
+    commandLine(
+      "/player",
+      "View your own or another camper's profile card.",
+    ),
+    commandLine("/help", "Browse this guide anytime."),
+    commandLine("/ping", "Check the bot's latency."),
     "",
     "Every command works right here, no matter where you're camping from.",
   ].join("\n"),

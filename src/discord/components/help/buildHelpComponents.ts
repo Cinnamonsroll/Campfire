@@ -15,12 +15,12 @@ import { helpPages } from "./helpPages.js";
 
 const PAGE_INDICATOR_ID = `${HELP_PAGE_PREFIX}_indicator`;
 
-export interface HelpComponentPayload {
+interface HelpComponentPayload {
   readonly components: JSONEncodable<APIMessageTopLevelComponent>[];
   readonly flags: number;
 }
 
-export const HELP_PAGE_COUNT = helpPages.length;
+const HELP_PAGE_COUNT = helpPages.length;
 
 function pageButton(
   label: string,

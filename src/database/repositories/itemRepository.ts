@@ -1,7 +1,7 @@
 import { pool } from "../client.js";
 import type { Db } from "../db.js";
 
-export interface Item {
+interface Item {
   id: string;
   item_key: string;
   created_at: Date;

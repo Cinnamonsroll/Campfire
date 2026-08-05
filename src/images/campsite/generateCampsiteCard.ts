@@ -2,13 +2,10 @@ import { createCanvas, type SKRSContext2D } from "@napi-rs/canvas";
 import { drawBuildingCard } from "./drawBuildingCard.js";
 import { drawStatCard } from "./drawStatCard.js";
 import { fillRoundRect } from "../shared/canvas.js";
-import { drawEmoji } from "../shared/emoji.js";
+import { drawEmoji, prefetchEmojis } from "../shared/emoji.js";
 import { SCALE, COLORS } from "../shared/layout.js";
 import { font } from "../shared/typography.js";
-import type {
-  CampsiteCardData,
-  UpgradeCardData,
-} from "../types/index.js";
+import type { CampsiteCardData, UpgradeCardData } from "../types/index.js";
 import { CAMP_NAME } from "../../game/services/campService.js";
 
 const CAMP_WIDTH = 520 * SCALE;
@@ -120,6 +117,24 @@ async function drawUpgradeCard(
 export async function generateCampsiteCard(
   data: CampsiteCardData,
 ): Promise<Buffer> {
+  const prefetches: Promise<void>[] = [
+    prefetchEmojis(
+      data.buildings
+        .filter((building) => !building.isLocked)
+        .map((building) => building.emoji),
+      36 * SCALE,
+    ),
+    prefetchEmojis([data.upgrade.emoji], 30 * SCALE),
+    prefetchEmojis(
+      ["🪙", ...data.upgrade.costItems.map((item) => item.emoji)],
+      14 * SCALE,
+    ),
+  ];
+  if (data.buildings.some((building) => building.isLocked)) {
+    prefetches.push(prefetchEmojis(["🔒"], 28 * SCALE));
+  }
+  await Promise.all(prefetches);
+
   const canvas = createCanvas(CAMP_WIDTH, CAMP_HEIGHT);
   const ctx = canvas.getContext("2d");
   ctx.imageSmoothingEnabled = true;

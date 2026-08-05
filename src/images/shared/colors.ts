@@ -1,8 +1,9 @@
-import { createCanvas, loadImage } from "@napi-rs/canvas";
+import { createCanvas } from "@napi-rs/canvas";
 import { COLORS } from "./layout.js";
+import { loadImageCached } from "./canvas.js";
 import { logger } from "../../utils/logger.js";
 
-export interface RGB {
+interface RGB {
   r: number;
   g: number;
   b: number;
@@ -68,7 +69,7 @@ export async function extractHeaderColor(
   if (cached) return cached;
 
   try {
-    const img = await loadImage(avatarUrl);
+    const img = await loadImageCached(avatarUrl);
     const canvas = createCanvas(SAMPLE_SIZE, SAMPLE_SIZE);
     const ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0, SAMPLE_SIZE, SAMPLE_SIZE);

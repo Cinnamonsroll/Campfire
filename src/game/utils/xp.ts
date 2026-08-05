@@ -1,4 +1,4 @@
-export interface XpHolder {
+interface XpHolder {
   level: number;
   xp: number;
 }

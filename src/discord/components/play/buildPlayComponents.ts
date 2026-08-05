@@ -21,7 +21,7 @@ import { markup } from "../../../utils/markup.js";
 const MIN_PLAY_ENERGY = 10;
 const MAX_LINES_PER_TEXT_DISPLAY = 15;
 
-export interface PlayComponentPayload {
+interface PlayComponentPayload {
   readonly components: JSONEncodable<APIMessageTopLevelComponent>[];
   readonly flags: number;
 }

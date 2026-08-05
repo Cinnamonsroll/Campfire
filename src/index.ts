@@ -24,6 +24,7 @@ import {
   loadInteractionHandlers,
   interactionsDir,
 } from "./utils/loaders/interactions.js";
+import { warmImageCaches } from "./images/warmup.js";
 
 declare module "discord.js" {
   interface Client {
@@ -92,6 +93,7 @@ async function main(): Promise<void> {
   }
 
   await client.login(env.DISCORD_TOKEN);
+  void warmImageCaches();
 }
 
 main().catch((error: unknown) => {

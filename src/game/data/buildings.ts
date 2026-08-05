@@ -1,4 +1,4 @@
-export interface BuildingDefinition {
+interface BuildingDefinition {
   key: string;
   name: string;
   emoji: string;
@@ -26,7 +26,7 @@ export const BUILDINGS: readonly BuildingDefinition[] = [
   },
 ];
 
-export interface ComingSoonBuilding {
+interface ComingSoonBuilding {
   name: string;
   emoji: string;
 }
@@ -35,17 +35,3 @@ export const COMING_SOON: readonly ComingSoonBuilding[] = [
   { name: "Marsh Cabin", emoji: "🛖" },
   { name: "Flower Patch", emoji: "🌻" },
 ];
-
-export interface UpgradeDefinition {
-  emoji: string;
-  name: string;
-  effect: string;
-  cost: string;
-}
-
-export const NEXT_UPGRADE: UpgradeDefinition = {
-  emoji: "⛺",
-  name: "Better Tent",
-  effect: "+10 Max Energy",
-  cost: "250 Coins",
-};

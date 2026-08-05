@@ -1,5 +1,10 @@
 import { SKRSContext2D, createCanvas } from "@napi-rs/canvas";
-import { fillRoundRect, drawProgressBar, drawAvatar } from "../shared/canvas.js";
+import {
+  fillRoundRect,
+  drawProgressBar,
+  drawAvatar,
+  loadImageCached,
+} from "../shared/canvas.js";
 import { drawEmoji, prefetchEmojis } from "../shared/emoji.js";
 import { SCALE, withAlpha, COLORS } from "../shared/layout.js";
 import { font } from "../shared/typography.js";
@@ -41,7 +46,7 @@ function formatValue(value: number, unit: string | null): string {
 function drawTileBackground(ctx: SKRSContext2D, x: number, y: number): void {
   ctx.save();
   ctx.shadowColor = withAlpha(COLORS.black, 0.06);
-  ctx.shadowBlur = 7 * SCALE;
+  ctx.shadowBlur = 0;
   ctx.shadowOffsetY = 3 * SCALE;
   fillRoundRect(ctx, x, y, TILE_WIDTH, TILE_HEIGHT, 12 * SCALE, COLORS.card);
   ctx.restore();
@@ -97,12 +102,15 @@ async function drawStatisticTile(
 export async function generateStatisticsCard(
   data: StatisticsCardData,
 ): Promise<Buffer> {
-  await prefetchEmojis(
-    data.statistics
-      .slice(0, MAX_STATISTICS)
-      .map((statistic) => statistic.emoji),
-    22 * SCALE,
-  );
+  await Promise.all([
+    prefetchEmojis(
+      data.statistics
+        .slice(0, MAX_STATISTICS)
+        .map((statistic) => statistic.emoji),
+      22 * SCALE,
+    ),
+    loadImageCached(data.avatarUrl),
+  ]);
 
   const canvas = createCanvas(CARD_WIDTH, CARD_HEIGHT);
   const ctx = canvas.getContext("2d");

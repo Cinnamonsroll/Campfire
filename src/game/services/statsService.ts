@@ -8,12 +8,12 @@ import {
   type StatisticDefinition,
 } from "../data/statistics.js";
 
-export interface StatisticValue {
+interface StatisticValue {
   definition: StatisticDefinition;
   value: number;
 }
 
-export async function countTrailsUnlocked(
+async function countTrailsUnlocked(
   playerId: string,
   db: Db = pool,
 ): Promise<number> {
@@ -37,7 +37,7 @@ export async function recordLocationVisit(
   );
 }
 
-export async function journalCompletion(
+async function journalCompletion(
   playerId: string,
   db: Db = pool,
 ): Promise<{ discovered: number; total: number }> {
@@ -75,5 +75,3 @@ export async function getStatistics(
     value: values[definition.key],
   }));
 }
-
-export type { PlayerStatField } from "../../database/repositories/statRepository.js";

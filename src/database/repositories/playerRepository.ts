@@ -54,18 +54,6 @@ export async function create(
   return result.rows[0];
 }
 
-export async function updateCharacterName(
-  discordId: string,
-  name: string,
-  db: Db = pool,
-): Promise<Player | null> {
-  const result = await db.query<Player>(
-    `UPDATE players SET character_name = $2, updated_at = NOW() WHERE discord_id = $1 RETURNING *`,
-    [discordId, name],
-  );
-  return result.rows[0] ?? null;
-}
-
 export async function update(
   id: string,
   fields: Partial<

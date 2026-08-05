@@ -14,7 +14,7 @@ export interface RewardItemGrant {
   quantity: number;
 }
 
-export interface GrantRewardsOptions {
+interface GrantRewardsOptions {
   player: Player;
   xp?: number;
   coins?: number;
@@ -26,7 +26,7 @@ export interface GrantRewardsOptions {
 
 export class StorageFullError extends Error {}
 
-export interface RewardItemSummary {
+interface RewardItemSummary {
   itemKey: string;
   name: string;
   emoji: string;
@@ -40,7 +40,7 @@ export interface RewardSummary {
   levelUp: GrantXpResult | null;
 }
 
-export interface GrantRewardsResult {
+interface GrantRewardsResult {
   player: Player;
   summary: RewardSummary;
 }

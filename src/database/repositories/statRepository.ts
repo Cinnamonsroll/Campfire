@@ -2,7 +2,7 @@ import { pool } from "../client.js";
 import type { Db } from "../db.js";
 import type { Player } from "./playerRepository.js";
 
-export type PlayerStatField =
+type PlayerStatField =
   | "caught_fish"
   | "items_collected"
   | "coins_earned"
@@ -10,7 +10,7 @@ export type PlayerStatField =
   | "upgrades_purchased"
   | "quests_completed";
 
-export type PlayerStatDeltas = Partial<Record<PlayerStatField, number>>;
+type PlayerStatDeltas = Partial<Record<PlayerStatField, number>>;
 
 const STAT_FIELDS: readonly PlayerStatField[] = [
   "caught_fish",
