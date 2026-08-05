@@ -31,12 +31,14 @@ export function getBuildingLevel(
   key: CampBuildingKey,
 ): number {
   if (!camp) return 1;
-  const levels: Record<CampBuildingKey, number> = {
-    tent: camp.tent_level,
-    campfire: camp.campfire_level,
-    storage: camp.storage_level,
-  };
-  return levels[key];
+  switch (key) {
+    case "tent":
+      return camp.tent_level;
+    case "campfire":
+      return camp.campfire_level;
+    case "storage":
+      return camp.storage_level;
+  }
 }
 
 export function getCampLevel(camp: PlayerCamp | null): number {

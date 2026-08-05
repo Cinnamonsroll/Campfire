@@ -93,22 +93,31 @@ export async function removeItems(
 ): Promise<InventoryEntry[]> {
   if (entries.length === 0) return [];
 
-  const result: InventoryEntry[] = [];
+  const values: unknown[] = [];
+  const placeholders: string[] = [];
+  let paramIndex = 1;
+
   for (const entry of entries) {
-    const updated = await db.query<InventoryEntry>(
-      `UPDATE player_inventory
-       SET quantity = GREATEST(quantity - $3, 0)
-       WHERE player_id = $1 AND item_id = $2
-       RETURNING *`,
-      [playerId, entry.itemId, entry.quantity],
+    placeholders.push(
+      `($${String(paramIndex)}, $${String(paramIndex + 1)})`,
     );
-    result.push(...updated.rows);
+    values.push(entry.itemId, entry.quantity);
+    paramIndex += 2;
   }
+
+  const result = await db.query<InventoryEntry>(
+    `UPDATE player_inventory pi
+     SET quantity = GREATEST(pi.quantity - sub.quantity, 0)
+     FROM (VALUES ${placeholders.join(", ")}) AS sub(item_id, quantity)
+     WHERE pi.player_id = $1 AND pi.item_id = sub.item_id
+     RETURNING pi.*`,
+    [playerId, ...values],
+  );
 
   await db.query(
     `DELETE FROM player_inventory WHERE player_id = $1 AND quantity <= 0`,
     [playerId],
   );
 
-  return result;
+  return result.rows;
 }

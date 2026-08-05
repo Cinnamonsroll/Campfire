@@ -18,7 +18,6 @@ import {
   update as updatePlayer,
   type Player,
 } from "../../database/repositories/playerRepository.js";
-import { ensureItemsByKeys } from "../../database/repositories/itemRepository.js";
 import {
   addItems,
   findQuantitiesByItemKeys,
@@ -35,6 +34,10 @@ export class TradeError extends Error {}
 function firstItem<T>(rows: readonly T[]): T | undefined {
   return rows[0];
 }
+
+type OwnedItemRow = Awaited<
+  ReturnType<typeof findQuantitiesByItemKeys>
+>[number];
 
 export interface TradeParticipant {
   player: Player;
@@ -297,7 +300,10 @@ export async function acceptTrade(
   });
 }
 
-async function validateOwnership(state: TradeState, db: Db): Promise<void> {
+function validateOwnership(
+  state: TradeState,
+  ownedByPlayer: Map<string, Map<string, OwnedItemRow>>,
+): void {
   for (const side of [state.sender, state.receiver]) {
     const { player, offer } = side;
     if (offer.coins > player.coins) {
@@ -306,15 +312,11 @@ async function validateOwnership(state: TradeState, db: Db): Promise<void> {
       );
     }
 
-    const itemKeys = Object.keys(offer.items);
-    if (itemKeys.length === 0) continue;
+    const ownedByKey = ownedByPlayer.get(player.id);
+    if (!ownedByKey) continue;
 
-    const owned = await findQuantitiesByItemKeys(player.id, itemKeys, db);
-    const ownedByKey = new Map(
-      owned.map((entry) => [entry.itemKey, entry.quantity]),
-    );
     for (const [itemKey, quantity] of Object.entries(offer.items)) {
-      if ((ownedByKey.get(itemKey) ?? 0) < quantity) {
+      if ((ownedByKey.get(itemKey)?.quantity ?? 0) < quantity) {
         const item = getItemDefinition(itemKey);
         throw new TradeError(
           `${player.character_name ?? "A camper"} no longer has enough ${item?.name ?? itemKey} to trade.`,
@@ -327,6 +329,7 @@ async function validateOwnership(state: TradeState, db: Db): Promise<void> {
 async function transferOffer(
   from: TradeParticipant,
   to: TradeParticipant,
+  ownedByKey: Map<string, OwnedItemRow>,
   db: Db,
 ): Promise<void> {
   const { player, offer } = from;
@@ -339,17 +342,12 @@ async function transferOffer(
   for (const [itemKey, quantity] of Object.entries(offer.items)) {
     if (quantity <= 0) continue;
 
-    const dbItem = firstItem(await ensureItemsByKeys([itemKey], db));
-    if (!dbItem) continue;
-
-    const row = firstItem(
-      await findQuantitiesByItemKeys(player.id, [itemKey], db),
-    );
+    const row = ownedByKey.get(itemKey);
     if (!row) {
       throw new TradeError("A camper no longer has the items they offered.");
     }
     await removeItems(player.id, [{ itemId: row.itemId, quantity }], db);
-    await addItems(to.player.id, [{ itemId: dbItem.id, quantity }], db);
+    await addItems(to.player.id, [{ itemId: row.itemId, quantity }], db);
   }
 }
 
@@ -370,10 +368,32 @@ export async function executeTrade(
     throw new TradeError("That trade has expired.");
   }
 
-  await validateOwnership(state, db);
+  const ownedByPlayer = new Map<string, Map<string, OwnedItemRow>>();
+  for (const side of [sender, receiver]) {
+    const itemKeys = Object.keys(side.offer.items);
+    if (itemKeys.length === 0) continue;
 
-  await transferOffer(sender, receiver, db);
-  await transferOffer(receiver, sender, db);
+    const owned = await findQuantitiesByItemKeys(side.player.id, itemKeys, db);
+    ownedByPlayer.set(
+      side.player.id,
+      new Map(owned.map((entry) => [entry.itemKey, entry])),
+    );
+  }
+
+  validateOwnership(state, ownedByPlayer);
+
+  await transferOffer(
+    sender,
+    receiver,
+    ownedByPlayer.get(sender.player.id) ?? new Map<string, OwnedItemRow>(),
+    db,
+  );
+  await transferOffer(
+    receiver,
+    sender,
+    ownedByPlayer.get(receiver.player.id) ?? new Map<string, OwnedItemRow>(),
+    db,
+  );
 
   await updatePlayer(sender.player.id, { coins: sender.player.coins }, db);
   await updatePlayer(receiver.player.id, { coins: receiver.player.coins }, db);

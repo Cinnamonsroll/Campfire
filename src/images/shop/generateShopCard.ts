@@ -176,7 +176,7 @@ export async function generateShopCard(data: ShopCardData): Promise<Buffer> {
       data.items.map((item) => item.emoji),
       28 * SCALE,
     ),
-    prefetchEmojis(["ðŸª™"], 10 * SCALE),
+    prefetchEmojis(["🪙"], 10 * SCALE),
   ]);
 
   const canvas = createCanvas(SHOP_WIDTH, CARD_HEIGHT);

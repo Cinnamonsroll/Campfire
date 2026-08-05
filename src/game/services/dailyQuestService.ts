@@ -2,7 +2,7 @@ import { pool } from "../../database/client.js";
 import { Db } from "../../database/db.js";
 import { findByPlayerId as findCamp } from "../../database/repositories/campRepository.js";
 import { Player } from "../../database/repositories/playerRepository.js";
-import { DailyQuestRow, upsertQuests, ensurePlayerQuestRow, findDailyByPlayerId, updateProgress, PlayerQuest, setClaimed } from "../../database/repositories/questRepository.js";
+import { DailyQuestRow, upsertQuests, ensurePlayerQuestRows, findDailyByPlayerId, updateProgress, PlayerQuest, setClaimed } from "../../database/repositories/questRepository.js";
 import { addStats } from "../../database/repositories/statRepository.js";
 import { withTransaction } from "../../database/transaction.js";
 import { redis } from "../../redis/client.js";
@@ -111,10 +111,10 @@ export async function getDailyQuests(
     questRows.map((quest) => [quest.quest_key, quest.id]),
   );
 
-  for (const key of keys) {
-    const questId = questIdByKey.get(key);
-    if (questId) await ensurePlayerQuestRow(playerId, questId, date, db);
-  }
+  const questIds = keys
+    .map((key) => questIdByKey.get(key))
+    .filter((id): id is string => id !== undefined);
+  await ensurePlayerQuestRows(playerId, questIds, date, db);
 
   return findDailyByPlayerId(playerId, date, db);
 }

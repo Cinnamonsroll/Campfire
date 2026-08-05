@@ -44,74 +44,62 @@ export async function upsertQuests(
 ): Promise<QuestRow[]> {
   if (quests.length === 0) return [];
 
+  const columns = `(quest_key, title, description, emoji, quest_type,
+                   target_key, target, reward_xp, reward_coins)`;
+  const placeholders: string[] = [];
+  const values: unknown[] = [];
+  let paramIndex = 1;
+
   for (const quest of quests) {
-    await db.query(
-      `INSERT INTO quests (quest_key, title, description, emoji, quest_type,
-                           target_key, target, reward_xp, reward_coins)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-       ON CONFLICT (quest_key) DO UPDATE SET
-         title = EXCLUDED.title,
-         description = EXCLUDED.description,
-         emoji = EXCLUDED.emoji,
-         quest_type = EXCLUDED.quest_type,
-         target_key = EXCLUDED.target_key,
-         target = EXCLUDED.target,
-         reward_xp = EXCLUDED.reward_xp,
-         reward_coins = EXCLUDED.reward_coins`,
-      [
-        quest.quest_key,
-        quest.title,
-        quest.description,
-        quest.emoji,
-        quest.quest_type,
-        quest.target_key,
-        quest.target,
-        quest.reward_xp,
-        quest.reward_coins,
-      ],
+    placeholders.push(
+      `($${String(paramIndex)}, $${String(paramIndex + 1)}, $${String(paramIndex + 2)}, $${String(paramIndex + 3)}, $${String(paramIndex + 4)}, $${String(paramIndex + 5)}, $${String(paramIndex + 6)}, $${String(paramIndex + 7)}, $${String(paramIndex + 8)})`,
     );
+    values.push(
+      quest.quest_key,
+      quest.title,
+      quest.description,
+      quest.emoji,
+      quest.quest_type,
+      quest.target_key,
+      quest.target,
+      quest.reward_xp,
+      quest.reward_coins,
+    );
+    paramIndex += 9;
   }
 
   const result = await db.query<QuestRow>(
-    `SELECT * FROM quests WHERE quest_key = ANY($1)`,
-    [quests.map((quest) => quest.quest_key)],
+    `INSERT INTO quests ${columns}
+     VALUES ${placeholders.join(", ")}
+     ON CONFLICT (quest_key) DO UPDATE SET
+       title = EXCLUDED.title,
+       description = EXCLUDED.description,
+       emoji = EXCLUDED.emoji,
+       quest_type = EXCLUDED.quest_type,
+       target_key = EXCLUDED.target_key,
+       target = EXCLUDED.target,
+       reward_xp = EXCLUDED.reward_xp,
+       reward_coins = EXCLUDED.reward_coins
+     RETURNING *`,
+    values,
   );
   return result.rows;
 }
 
-export async function ensurePlayerQuestRow(
+export async function ensurePlayerQuestRows(
   playerId: string,
-  questId: string,
+  questIds: string[],
   date: string,
   db: Db = pool,
-): Promise<PlayerQuest> {
-  const result = await db.query<PlayerQuest>(
+): Promise<void> {
+  if (questIds.length === 0) return;
+
+  await db.query(
     `INSERT INTO player_quests (player_id, quest_id, date)
-     VALUES ($1, $2, $3)
-     ON CONFLICT (player_id, quest_id, date) DO NOTHING
-     RETURNING *`,
-    [playerId, questId, date],
+     SELECT $1, unnest($2::uuid[]), $3
+     ON CONFLICT (player_id, quest_id, date) DO NOTHING`,
+    [playerId, questIds, date],
   );
-  if (result.rows[0]) return result.rows[0];
-
-  const existing = await findPlayerQuest(playerId, questId, date, db);
-  if (existing) return existing;
-
-  throw new Error(`Unable to create player quest row for ${questId}`);
-}
-
-export async function findPlayerQuest(
-  playerId: string,
-  questId: string,
-  date: string,
-  db: Db = pool,
-): Promise<PlayerQuest | null> {
-  const result = await db.query<PlayerQuest>(
-    `SELECT * FROM player_quests
-     WHERE player_id = $1 AND quest_id = $2 AND date = $3`,
-    [playerId, questId, date],
-  );
-  return result.rows[0] ?? null;
 }
 
 export async function findDailyByPlayerId(
