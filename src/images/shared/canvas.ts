@@ -3,8 +3,24 @@ import { drawEmoji } from "./emoji.js";
 import { SCALE, COLORS, withAlpha } from "./layout.js";
 import { font } from "./typography.js";
 
-const imageCache = new Map<string, Awaited<ReturnType<typeof loadImage>>>();
+const imageCache = new Map<
+  string,
+  Promise<Awaited<ReturnType<typeof loadImage>>>
+>();
 
+export function loadImageCached(
+  url: string,
+): Promise<Awaited<ReturnType<typeof loadImage>>> {
+  let promise = imageCache.get(url);
+  if (!promise) {
+    promise = loadImage(url).catch((error) => {
+      imageCache.delete(url);
+      throw error;
+    });
+    imageCache.set(url, promise);
+  }
+  return promise;
+}
 export function roundRect(
   ctx: SKRSContext2D,
   x: number,
@@ -43,12 +59,7 @@ export function fillRoundRect(
 async function loadCachedImage(
   url: string,
 ): Promise<Awaited<ReturnType<typeof loadImage>>> {
-  let img = imageCache.get(url);
-  if (!img) {
-    img = await loadImage(url);
-    imageCache.set(url, img);
-  }
-  return img;
+  return loadImageCached(url);
 }
 
 export async function drawAvatar(
@@ -94,7 +105,7 @@ export async function drawAvatar(
 
   ctx.save();
   ctx.shadowColor = withAlpha(COLORS.black, 0.1);
-  ctx.shadowBlur = 10 * SCALE;
+  ctx.shadowBlur = 0;
   ctx.shadowOffsetY = 4 * SCALE;
   ctx.beginPath();
   ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
@@ -113,7 +124,7 @@ export function drawStatBg(
 ): void {
   ctx.save();
   ctx.shadowColor = withAlpha(COLORS.black, 0.06);
-  ctx.shadowBlur = 8 * SCALE;
+  ctx.shadowBlur = 0;
   ctx.shadowOffsetY = 3 * SCALE;
   fillRoundRect(ctx, x, y, width, height, 10 * SCALE, COLORS.cards);
   ctx.restore();
@@ -200,7 +211,7 @@ export async function drawInventorySlot(
 ): Promise<void> {
   ctx.save();
   ctx.shadowColor = withAlpha(COLORS.black, 0.06);
-  ctx.shadowBlur = 6 * SCALE;
+  ctx.shadowBlur = 0;
   ctx.shadowOffsetY = 2 * SCALE;
   fillRoundRect(ctx, x, y, width, height, 8 * SCALE, cardColor);
   ctx.restore();

@@ -99,7 +99,7 @@ async function drawShopItemTile(
 
   ctx.save();
   ctx.shadowColor = withAlpha(COLORS.black, 0.06);
-  ctx.shadowBlur = 6 * SCALE;
+  ctx.shadowBlur = 0;
   ctx.shadowOffsetY = 2 * SCALE;
   fillRoundRect(ctx, x, y, TILE_WIDTH, TILE_HEIGHT, 10 * SCALE, background);
   ctx.restore();
