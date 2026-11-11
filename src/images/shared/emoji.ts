@@ -28,6 +28,7 @@ async function loadEmoji(
     entities = parse(emoji);
     if (entities.length === 0) return null;
     parseCache.set(emoji, entities);
+    setTimeout(() => parseCache.delete(emoji), 3 * 3600 * 1000);
   }
 
   const url = entities[0].url;
@@ -39,10 +40,12 @@ async function loadEmoji(
       if (!svg) {
         svg = await (await fetch(url)).text();
         svgCache.set(url, svg);
+        setTimeout(() => svgCache.delete(url), 3 * 3600 * 1000);
       }
       return loadImage(Buffer.from(sizedSvg(svg, size)));
     })();
     imageCache.set(cacheKey, image);
+    setTimeout(() => imageCache.delete(cacheKey), 3 * 3600 * 1000);
   }
 
   try {
