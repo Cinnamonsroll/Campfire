@@ -69,15 +69,10 @@ function chunkEntries(
 function buildCategoryDisplays(
   section: JournalCategoryView,
 ): TextDisplayBuilder[] {
-  const displays = [
+  return [
     new TextDisplayBuilder().setContent(formatJournalCategoryHeader(section)),
+    ...chunkEntries(section.entries).map(chunk => new TextDisplayBuilder().setContent(formatJournalEntries(chunk)))
   ];
-  for (const chunk of chunkEntries(section.entries)) {
-    displays.push(
-      new TextDisplayBuilder().setContent(formatJournalEntries(chunk)),
-    );
-  }
-  return displays;
 }
 
 function buildFilledContainer(

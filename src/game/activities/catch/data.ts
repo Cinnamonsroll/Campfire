@@ -126,11 +126,5 @@ export const INSECT_POOLS: Record<string, { insectKey: string; weight: number }[
 };
 
 export function makeSequence(length: number): string[] {
-  const sequence: string[] = [];
-  for (let i = 0; i < length; i++) {
-    sequence.push(
-      CATCH_DIRECTIONS[Math.floor(Math.random() * CATCH_DIRECTIONS.length)],
-    );
-  }
-  return sequence;
+  return Array.from({ length }, () => CATCH_DIRECTIONS[Math.floor(Math.random() * CATCH_DIRECTIONS.length)]);
 }

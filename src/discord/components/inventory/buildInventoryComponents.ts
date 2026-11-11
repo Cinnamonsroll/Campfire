@@ -69,13 +69,10 @@ function chunkItems(
 function buildCategoryDisplays(
   section: InventoryCategoryView,
 ): TextDisplayBuilder[] {
-  const displays = [
+  return [
     new TextDisplayBuilder().setContent(formatCategoryHeader(section)),
+    ...chunkItems(section.items).map(chunk => new TextDisplayBuilder().setContent(formatItemLines(chunk)))
   ];
-  for (const chunk of chunkItems(section.items)) {
-    displays.push(new TextDisplayBuilder().setContent(formatItemLines(chunk)));
-  }
-  return displays;
 }
 
 function buildFilledContainer(

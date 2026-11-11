@@ -115,8 +115,5 @@ export const WILDLIFE_POOLS: Record<string, { wildlifeKey: string; weight: numbe
 };
 
 export function qualityFromElapsed(elapsedMs: number): PhotoQuality {
-  for (const timing of PHOTO_QUALITY_TIMING) {
-    if (elapsedMs <= timing.maxMs) return timing.quality;
-  }
-  return "missed";
+  return PHOTO_QUALITY_TIMING.find(timing => elapsedMs <= timing.maxMs)?.quality ?? "missed";
 }
