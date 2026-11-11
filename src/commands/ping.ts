@@ -4,6 +4,7 @@ import { pool } from "../database/client.js";
 import { markup } from "../utils/markup.js";
 import type { Command } from "../types/index.js";
 import { logger } from "../utils/logger.js";
+import { reportError, flushVanta, vanta } from "../utils/vanta.js";
 
 const command: Command = {
   data: new SlashCommandBuilder()
@@ -31,6 +32,7 @@ const command: Command = {
       dbMs = performance.now() - dbStart;
     } catch (error) {
       logger.error(error, "Database ping failed");
+      reportError(error);
     }
 
     const wsMs = ctx.interaction.client.ws.ping;
@@ -60,6 +62,42 @@ const command: Command = {
     );
 
     await ctx.interaction.editReply({ embeds: [embed] });
+
+    try {
+      const measurements: Promise<void>[] = [
+        vanta.measure({
+          name: "ping.roundtrip",
+          value: roundtripMs,
+          unit: "ms",
+          tags: { type: "roundtrip" },
+        }),
+      ];
+      if (wsMs >= 0) {
+        measurements.push(
+          vanta.measure({
+            name: "ping.websocket",
+            value: wsMs,
+            unit: "ms",
+            tags: { type: "websocket" },
+          }),
+        );
+      }
+      if (dbMs !== null) {
+        measurements.push(
+          vanta.measure({
+            name: "ping.database",
+            value: dbMs,
+            unit: "ms",
+            tags: { type: "database" },
+          }),
+        );
+      }
+      await Promise.all(measurements);
+      await flushVanta();
+    } catch (error) {
+      logger.error(error, "Failed to record Vanta latency metrics");
+      reportError(error);
+    }
   },
 };
 

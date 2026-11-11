@@ -2,6 +2,7 @@ import { createCanvas } from "@napi-rs/canvas";
 import { COLORS } from "./layout.js";
 import { loadImageCached } from "./canvas.js";
 import { logger } from "../../utils/logger.js";
+import { reportError } from "../../utils/vanta.js";
 
 interface RGB {
   r: number;
@@ -137,6 +138,7 @@ export async function extractHeaderColor(
     return result;
   } catch (error) {
     logger.error(error, "Failed to extract avatar color");
+    reportError(error);
     colorCache.set(avatarUrl, FALLBACK);
     return FALLBACK;
   }

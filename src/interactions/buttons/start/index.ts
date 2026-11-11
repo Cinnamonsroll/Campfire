@@ -7,6 +7,7 @@ import {
 import type { ButtonHandler } from "../../../types/index.js";
 import { locationVignette } from "../../../embeds/index.js";
 import { logger } from "../../../utils/logger.js";
+import { reportError } from "../../../utils/vanta.js";
 import { assertMessageAuthor } from "../../../utils/interactionAuthor.js";
 
 async function handleContinue(
@@ -35,6 +36,7 @@ async function handleContinue(
     await interaction.showModal(modal);
   } catch (error) {
     logger.error(error, "Failed to show modal on continue button");
+    reportError(error);
   }
 }
 
@@ -52,6 +54,7 @@ async function handleLocation(
     });
   } catch (error) {
     logger.error(error, "Failed to update interaction for location button");
+    reportError(error);
   }
 }
 

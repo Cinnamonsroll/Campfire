@@ -41,6 +41,7 @@ import {
   TradeError,
 } from "../../../game/services/tradeService.js";
 import { logger } from "../../../utils/logger.js";
+import { reportError } from "../../../utils/vanta.js";
 
 async function getParticipantId(
   interaction: Parameters<ButtonHandler>[0],
@@ -273,6 +274,7 @@ async function handleTradeButton(
       return;
     }
     logger.error(error, "Failed to handle trade button");
+    reportError(error);
     const payload = {
       embeds: [errorEmbed("The trade hit a snag. Try again in a moment.")],
       flags: MessageFlags.Ephemeral,

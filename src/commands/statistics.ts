@@ -5,6 +5,7 @@ import { getStatistics } from "../game/services/statsService.js";
 import { generateStatisticsCard } from "../images/index.js";
 import { Command } from "../types/index.js";
 import { logger } from "../utils/loaders/index.js";
+import { reportError } from "../utils/vanta.js";
 
 const command: Command = {
   data: new SlashCommandBuilder()
@@ -64,6 +65,7 @@ const command: Command = {
       });
     } catch (error) {
       logger.error(error, "Failed to render statistics card");
+      reportError(error);
       await ctx.interaction.editReply({
         embeds: [
           errorEmbed(

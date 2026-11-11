@@ -4,7 +4,8 @@ import {
   type StringSelectMenuInteraction,
 } from "discord.js";
 import { errorEmbed } from "../embeds/index.js";
-import { logger } from "../utils/logger.js";
+import { logger } from "./logger.js";
+import { reportError } from "./vanta.js";
 
 export async function assertMessageAuthor(
   interaction: ButtonInteraction | StringSelectMenuInteraction,
@@ -19,6 +20,7 @@ export async function assertMessageAuthor(
       });
     } catch (error) {
       logger.error(error, "Failed to reply to non-author message interaction");
+      reportError(error);
     }
     return false;
   }

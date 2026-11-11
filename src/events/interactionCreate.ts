@@ -1,8 +1,11 @@
 import {
   Events,
   MessageFlags,
+  type ButtonInteraction,
   type Interaction,
   type InteractionReplyOptions,
+  type ModalSubmitInteraction,
+  type StringSelectMenuInteraction,
 } from "discord.js";
 import type { Event } from "../types/index.js";
 import { runGuards, type CommandContext } from "../guards/index.js";
@@ -10,6 +13,32 @@ import { checkPermissions } from "../utils/permissions.js";
 import { energyRestoredEmbed, errorEmbed } from "../embeds/index.js";
 import { tryPassiveRestore } from "../game/services/shop/index.js";
 import { logger } from "../utils/logger.js";
+import { vanta, reportError } from "../utils/vanta.js";
+
+type ComponentInteraction =
+  | ButtonInteraction
+  | StringSelectMenuInteraction
+  | ModalSubmitInteraction;
+
+function trackComponentUsage(
+  interaction: ComponentInteraction,
+  event: string,
+): void {
+  void vanta.identify({
+    userId: interaction.user.id,
+    name: interaction.user.username,
+  });
+  void vanta.track({
+    event,
+    userId: interaction.user.id,
+    data: {
+      customId: interaction.customId,
+      handlerPrefix: interaction.customId.split("|")[0] ?? "",
+      guild: interaction.guild?.id ?? "DM",
+      channel: interaction.channel?.id ?? "DM",
+    },
+  });
+}
 
 async function replyError(
   interaction: Interaction,
@@ -40,10 +69,12 @@ const event: Event = {
         interaction.client.buttonHandlers.get(interaction.customId) ??
         interaction.client.buttonHandlers.get(prefix);
       if (handler) {
+        trackComponentUsage(interaction, "button_clicked");
         try {
           await handler(interaction);
         } catch (error) {
           logger.error(error, "Error handling button interaction");
+          reportError(error);
           await replyError(
             interaction,
             "Something went wrong while processing that action.",
@@ -59,10 +90,12 @@ const event: Event = {
         interaction.client.selectHandlers.get(interaction.customId) ??
         interaction.client.selectHandlers.get(prefix);
       if (handler) {
+        trackComponentUsage(interaction, "select_menu_used");
         try {
           await handler(interaction);
         } catch (error) {
           logger.error(error, "Error handling select menu interaction");
+          reportError(error);
           await replyError(
             interaction,
             "Something went wrong while processing that selection.",
@@ -78,10 +111,12 @@ const event: Event = {
         interaction.client.modalHandlers.get(interaction.customId) ??
         interaction.client.modalHandlers.get(prefix);
       if (handler) {
+        trackComponentUsage(interaction, "modal_submitted");
         try {
           await handler(interaction);
         } catch (error) {
           logger.error(error, "Error handling modal submission");
+          reportError(error);
           await replyError(
             interaction,
             "Something went wrong while processing that form.",
@@ -130,13 +165,34 @@ const event: Event = {
         energyRestored = await tryPassiveRestore(ctx.player);
       } catch (error) {
         logger.error(error, "Failed to restore passive energy");
+        reportError(error);
       }
     }
 
     try {
+      void vanta.identify({
+        userId: interaction.user.id,
+        name: interaction.user.username,
+      });
+
+      
+
+      const start = performance.now();
+      void vanta.track({
+        event: "command_executed",
+        userId: interaction.user.id,
+        groupId: interaction.guild?.id ?? "DM",
+        data: {
+          commandName: interaction.commandName,
+          guild: interaction.guild?.id ?? "DM",
+          channel: interaction.channel?.id ?? "DM",
+        },
+      });
+      console.log(performance.now() - start, "ms to track command execution");
       await command.execute(ctx);
     } catch (error) {
       logger.error(error, "Error executing command");
+      reportError(error);
       await replyError(
         interaction,
         "Something went wrong while executing that command.",

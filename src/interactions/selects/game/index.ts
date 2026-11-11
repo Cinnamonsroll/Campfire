@@ -29,6 +29,7 @@ import { startPhotographing } from "../../../game/activities/photograph/photogra
 import { assertMessageAuthor } from "../../../utils/interactionAuthor.js";
 import { sleep } from "../../../utils/sleep.js";
 import { logger } from "../../../utils/logger.js";
+import { reportError } from "../../../utils/vanta.js";
 
 const NO_CAMPER_MESSAGE =
   "No camper here yet. Use `/start` to begin your summer.";
@@ -66,6 +67,7 @@ async function handleFishSelect(
       return;
     }
     logger.error(error, "Failed to start fishing");
+    reportError(error);
     await interaction.editReply(
       buildGameNoticePayload("Your line tangled. Try again in a moment."),
     );
@@ -101,6 +103,7 @@ async function handleGatherSelect(
       return;
     }
     logger.error(error, "Failed to gather");
+    reportError(error);
     await interaction.editReply(
       buildGameNoticePayload("You came back empty-handed. Try again."),
     );
@@ -137,6 +140,7 @@ async function handleCookSelect(
       return;
     }
     logger.error(error, "Failed to cook");
+    reportError(error);
     await interaction.editReply(
       buildGameNoticePayload("The pot boiled over. Try again."),
     );
@@ -172,6 +176,7 @@ async function handleCatchSelect(
       return;
     }
     logger.error(error, "Failed to start bug catching");
+    reportError(error);
     await interaction.editReply(
       buildGameNoticePayload("The insect slipped away. Try again."),
     );
@@ -207,6 +212,7 @@ async function handlePhotoSelect(
       return;
     }
     logger.error(error, "Failed to start photographing");
+    reportError(error);
     await interaction.editReply(
       buildGameNoticePayload("The wildlife scattered. Try again."),
     );

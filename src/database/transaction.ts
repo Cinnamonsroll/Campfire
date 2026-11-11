@@ -1,6 +1,7 @@
 import { pool } from "../database/client.js";
 import type { Db } from "../database/db.js";
 import { logger } from "../utils/logger.js";
+import { reportError } from "../utils/vanta.js";
 
 export async function withTransaction<T>(
   fn: (db: Db) => Promise<T>,
@@ -8,6 +9,7 @@ export async function withTransaction<T>(
   const client = await pool.connect();
   client.on("error", (err) => {
     logger.error(err, "Unexpected PostgreSQL transaction client error");
+    reportError(err);
   });
   try {
     await client.query("BEGIN");

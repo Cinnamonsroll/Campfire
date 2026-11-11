@@ -1,6 +1,7 @@
 import type { ModalHandler } from "../../../types/index.js";
 import { MessageFlags } from "discord.js";
 import { logger } from "../../../utils/logger.js";
+import { reportError } from "../../../utils/vanta.js";
 import {
   errorEmbed,
   campfireEmbed,
@@ -42,6 +43,7 @@ async function handleNameSubmit(
     await interaction.deferReply();
   } catch (error) {
     logger.error(error, "Failed to defer start modal reply");
+    reportError(error);
     return;
   }
 
@@ -90,6 +92,7 @@ async function handleNameSubmit(
     }
   } catch (error) {
     logger.error(error, "Failed to create player from start modal");
+    reportError(error);
     try {
       await interaction.editReply({
         embeds: [
@@ -103,6 +106,7 @@ async function handleNameSubmit(
         innerError,
         "Failed to send error reply after start modal failure",
       );
+      reportError(innerError);
     }
   }
 }

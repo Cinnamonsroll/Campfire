@@ -3,6 +3,7 @@ import { HELP_PAGE_PREFIX } from "../../../discord/customIds.js";
 import { buildHelpPayload } from "../../../discord/components/help/buildHelpComponents.js";
 import { assertMessageAuthor } from "../../../utils/interactionAuthor.js";
 import { logger } from "../../../utils/logger.js";
+import { reportError } from "../../../utils/vanta.js";
 
 async function handleHelpPage(
   interaction: Parameters<ButtonHandler>[0],
@@ -18,6 +19,7 @@ async function handleHelpPage(
     await interaction.update(buildHelpPayload(index));
   } catch (error) {
     logger.error(error, "Failed to flip help page");
+    reportError(error);
   }
 }
 

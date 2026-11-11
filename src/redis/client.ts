@@ -1,11 +1,13 @@
 import { createClient } from "redis";
 import { env } from "../config/index.js";
 import { logger } from "../utils/logger.js";
+import { reportError } from "../utils/vanta.js";
 
 export const redis = createClient({ url: env.REDIS_URL });
 
 redis.on("error", (err) => {
   logger.error(err, "Redis client error");
+  reportError(err);
 });
 
 redis.on("connect", () => {

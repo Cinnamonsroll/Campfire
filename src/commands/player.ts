@@ -1,6 +1,7 @@
 import { MessageFlags, SlashCommandBuilder } from "discord.js";
 import type { Command } from "../types/index.js";
 import { logger } from "../utils/logger.js";
+import { reportError } from "../utils/vanta.js";
 import { findByDiscordId } from "../database/repositories/playerRepository.js";
 import { findByPlayerId } from "../database/repositories/inventoryRepository.js";
 import { findByIds } from "../database/repositories/itemRepository.js";
@@ -89,6 +90,7 @@ const command: Command = {
       });
     } catch (error) {
       logger.error(error, "Failed to generate player card");
+      reportError(error);
       await ctx.interaction.editReply({
         embeds: [
           errorEmbed("The camp records got tangled up. Try again in a moment."),

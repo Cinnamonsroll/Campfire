@@ -25,6 +25,7 @@ import {
   interactionsDir,
 } from "./utils/loaders/interactions.js";
 import { warmImageCaches } from "./images/warmup.js";
+import { vanta } from "./utils/vanta.js";
 
 declare module "discord.js" {
   interface Client {
@@ -34,6 +35,8 @@ declare module "discord.js" {
     selectHandlers: Map<string, StringSelectMenuHandler>;
   }
 }
+
+const running = vanta.uptime.start('bot', { intervalMs: 30_000 })
 
 async function main(): Promise<void> {
   const commands = await loadCommands();
@@ -91,13 +94,14 @@ async function main(): Promise<void> {
     logger.error(error, "Failed to connect to database or Redis");
     process.exit(1);
   }
-
   await client.login(env.DISCORD_TOKEN);
   void warmImageCaches();
 }
 
-main().catch((error: unknown) => {
+main().catch(async (error: unknown) => {
   logger.error(error, "Fatal startup error");
+  await vanta.shutdown();
+  running.stop();
   process.exit(1);
 });
 
@@ -105,6 +109,8 @@ async function shutdown(): Promise<void> {
   logger.info("Shutting down...");
   await pool.end();
   await disconnectRedis();
+  await vanta.shutdown();
+  running.stop();
   process.exit(0);
 }
 

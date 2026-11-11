@@ -14,6 +14,7 @@ import { findByDiscordId } from "../../../database/repositories/playerRepository
 import { errorEmbed } from "../../../embeds/index.js";
 import { assertMessageAuthor } from "../../../utils/interactionAuthor.js";
 import { logger } from "../../../utils/logger.js";
+import { reportError } from "../../../utils/vanta.js";
 
 async function refreshShop(
   interaction: Parameters<ButtonHandler>[0],
@@ -66,6 +67,7 @@ async function handleShopBuy(
       return;
     }
     logger.error(error, "Failed to buy shop item");
+    reportError(error);
     await refreshShop(interaction, date);
     await interaction.followUp({
       embeds: [errorEmbed("The register jammed. Try again in a moment.")],
@@ -98,6 +100,7 @@ async function handleShopButton(
     }
   } catch (error) {
     logger.error(error, "Failed to handle shop button");
+    reportError(error);
     await interaction.editReply(
       buildShopNoticePayload(
         "The storefront flickered. Try again in a moment.",

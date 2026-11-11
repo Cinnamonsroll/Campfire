@@ -1,6 +1,7 @@
 import type { StringSelectMenuHandler } from "../../../types/index.js";
 import { assertMessageAuthor } from "../../../utils/interactionAuthor.js";
 import { logger } from "../../../utils/logger.js";
+import { reportError } from "../../../utils/vanta.js";
 import { FILTER_SELECT_CUSTOM_ID } from "../../../discord/components/journal/journalState.js";
 import { parseJournalFilter } from "../../../game/services/journal/index.js";
 import { updateJournal } from "../../journal/update.js";
@@ -17,6 +18,7 @@ async function handleFilter(
     await updateJournal(interaction, filter);
   } catch (error) {
     logger.error(error, "Failed to update journal from filter select");
+    reportError(error);
   }
 }
 

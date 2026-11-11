@@ -20,6 +20,7 @@ import {
 import { todayKey } from "../../../game/utils/date.js";
 import { assertMessageAuthor } from "../../../utils/interactionAuthor.js";
 import { logger } from "../../../utils/logger.js";
+import { reportError } from "../../../utils/vanta.js";
 
 async function resolveClaimableQuest(
   playerId: string,
@@ -78,6 +79,7 @@ async function handleClaim(
     });
   } catch (error) {
     logger.error(error, "Failed to claim daily quest");
+    reportError(error);
     await interaction.followUp({
       embeds: [errorEmbed("The reward slipped away. Try again in a moment.")],
       flags: MessageFlags.Ephemeral,

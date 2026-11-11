@@ -21,6 +21,7 @@ import { pressDirection } from "../../../game/activities/catch/catchService.js";
 import { capture } from "../../../game/activities/photograph/photographService.js";
 import { assertMessageAuthor } from "../../../utils/interactionAuthor.js";
 import { logger } from "../../../utils/logger.js";
+import { reportError } from "../../../utils/vanta.js";
 
 const NO_CAMPER_MESSAGE =
   "No camper here yet. Use `/start` to begin your summer.";
@@ -58,6 +59,7 @@ async function handleFishReel(
       return;
     }
     logger.error(error, "Failed to reel in fish");
+    reportError(error);
     await interaction.editReply(
       buildGameNoticePayload("The line snapped. Try again in a moment."),
     );
@@ -94,6 +96,7 @@ async function handleCatchStep(
       return;
     }
     logger.error(error, "Failed to handle catch step");
+    reportError(error);
     await interaction.editReply(
       buildGameNoticePayload("The chase slipped away. Try again."),
     );
@@ -122,6 +125,7 @@ async function handlePhotoCapture(
       return;
     }
     logger.error(error, "Failed to capture photo");
+    reportError(error);
     await interaction.editReply(
       buildGameNoticePayload("The shot didn't take. Try again."),
     );

@@ -11,6 +11,7 @@ import {
 } from "../../../game/services/tradeService.js";
 import { refreshTradeMessage } from "../../buttons/trade/index.js";
 import { logger } from "../../../utils/logger.js";
+import { reportError } from "../../../utils/vanta.js";
 
 async function handleTradeItemModal(
   interaction: Parameters<ModalHandler>[0],
@@ -70,6 +71,7 @@ async function handleTradeItemModal(
       return;
     }
     logger.error(error, "Failed to update trade offer from modal");
+    reportError(error);
     await interaction.editReply({
       embeds: [errorEmbed("The trade hit a snag. Try again in a moment.")],
     });

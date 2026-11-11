@@ -14,6 +14,7 @@ import {
 } from "../../../game/services/tradeService.js";
 import { refreshTradeMessage } from "../../buttons/trade/index.js";
 import { logger } from "../../../utils/logger.js";
+import { reportError } from "../../../utils/vanta.js";
 
 async function handleTradeSelect(
   interaction: Parameters<StringSelectMenuHandler>[0],
@@ -74,6 +75,7 @@ async function handleTradeSelect(
       return;
     }
     logger.error(error, "Failed to handle trade select");
+    reportError(error);
     await interaction.editReply({
       embeds: [errorEmbed("The trade hit a snag. Try again in a moment.")],
     });

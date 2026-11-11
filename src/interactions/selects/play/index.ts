@@ -10,6 +10,7 @@ import {
 } from "../../../game/services/adventureService.js";
 import { assertMessageAuthor } from "../../../utils/interactionAuthor.js";
 import { logger } from "../../../utils/logger.js";
+import { reportError } from "../../../utils/vanta.js";
 
 async function handlePlaySelect(
   interaction: Parameters<StringSelectMenuHandler>[0],
@@ -37,6 +38,7 @@ async function handlePlaySelect(
       return;
     }
     logger.error(error, "Failed to run adventure");
+    reportError(error);
     await interaction.editReply(
       buildPlayNoticePayload(
         "Your adventure hit a snag. Try again in a moment.",

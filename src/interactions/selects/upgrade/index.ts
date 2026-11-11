@@ -21,6 +21,7 @@ import { evaluateAndAwardAchievements } from "../../../game/services/progression
 import { withTransaction } from "../../../database/transaction.js";
 import { assertMessageAuthor } from "../../../utils/interactionAuthor.js";
 import { logger } from "../../../utils/logger.js";
+import { reportError } from "../../../utils/vanta.js";
 import type { AchievementDefinition, CampBuildingKey } from "../../../game/types.js";
 
 interface UpgradeOutcome {
@@ -108,6 +109,7 @@ async function handleUpgradeSelect(
     });
   } catch (error) {
     logger.error(error, "Failed to upgrade building");
+    reportError(error);
     await interaction.editReply(
       buildCampsiteNoticePayload(
         "The upgrade didn't take. Try again in a moment.",

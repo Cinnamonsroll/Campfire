@@ -1,6 +1,7 @@
 import { SlashCommandBuilder } from "discord.js";
 import type { Command } from "../types/index.js";
 import { logger } from "../utils/logger.js";
+import { reportError } from "../utils/vanta.js";
 import { IS_COMPONENTS_V2 } from "../discord/constants.js";
 import { hasCharacter } from "../guards/index.js";
 import { todayKey } from "../game/utils/date.js";
@@ -33,6 +34,7 @@ const command: Command = {
       });
     } catch (error) {
       logger.error(error, "Failed to render shop");
+      reportError(error);
       await ctx.interaction.editReply(
         buildShopNoticePayload(
           "The store shutters flapped shut for a moment. Try again soon.",

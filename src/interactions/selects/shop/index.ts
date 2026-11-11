@@ -8,6 +8,7 @@ import { getShop } from "../../../game/services/shop/index.js";
 import { findByDiscordId } from "../../../database/repositories/playerRepository.js";
 import { assertMessageAuthor } from "../../../utils/interactionAuthor.js";
 import { logger } from "../../../utils/logger.js";
+import { reportError } from "../../../utils/vanta.js";
 
 async function handleShopSelect(
   interaction: Parameters<StringSelectMenuHandler>[0],
@@ -37,6 +38,7 @@ async function handleShopSelect(
     await interaction.editReply(buildShopPayload(shop, { itemKey }));
   } catch (error) {
     logger.error(error, "Failed to pick a shop item");
+    reportError(error);
     await interaction.editReply(
       buildShopNoticePayload("The shelf wobbled. Try again in a moment."),
     );

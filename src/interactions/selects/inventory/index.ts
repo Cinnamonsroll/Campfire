@@ -1,6 +1,7 @@
 import type { StringSelectMenuHandler } from "../../../types/index.js";
 import { assertMessageAuthor } from "../../../utils/interactionAuthor.js";
 import { logger } from "../../../utils/logger.js";
+import { reportError } from "../../../utils/vanta.js";
 import { FILTER_SELECT_CUSTOM_ID } from "../../../discord/components/inventory/inventoryState.js";
 import { parseInventoryFilter } from "../../../game/services/inventory/index.js";
 import { updateInventory } from "../../inventory/update.js";
@@ -17,6 +18,7 @@ async function handleFilter(
     await updateInventory(interaction, filter);
   } catch (error) {
     logger.error(error, "Failed to update inventory from filter select");
+    reportError(error);
   }
 }
 

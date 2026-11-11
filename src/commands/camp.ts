@@ -1,6 +1,7 @@
 import { MessageFlags, SlashCommandBuilder } from "discord.js";
 import type { Command } from "../types/index.js";
 import { logger } from "../utils/logger.js";
+import { reportError } from "../utils/vanta.js";
 import { generateCampsiteCard } from "../images/index.js";
 import { errorEmbed } from "../embeds/index.js";
 import { getCampsite } from "../game/services/campService.js";
@@ -55,6 +56,7 @@ const command: Command = {
       });
     } catch (error) {
       logger.error(error, "Failed to generate campsite card");
+      reportError(error);
       await ctx.interaction.editReply(
         buildCampsiteNoticePayload(
           "The campsite got a little too sunny and the picture melted. Try again in a moment.",
