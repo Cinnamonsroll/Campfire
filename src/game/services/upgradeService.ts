@@ -113,12 +113,8 @@ export async function performUpgrade(
   const ownedByKey = new Map(
     owned.map((entry) => [entry.itemKey, entry.quantity]),
   );
-  const missingItems: CampUpgradeCostItem[] = [];
-  for (const cost of next.costItems) {
-    if ((ownedByKey.get(cost.itemKey) ?? 0) < cost.quantity) {
-      missingItems.push(cost);
-    }
-  }
+  const missingItems: CampUpgradeCostItem[] = next.costItems.filter(cost => (ownedByKey.get(cost.itemKey) ?? 0) < cost.quantity);
+
   if (missingItems.length > 0) {
     const item = ITEMS[missingItems[0].itemKey];
     throw new UpgradeError(

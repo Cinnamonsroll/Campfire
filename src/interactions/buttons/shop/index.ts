@@ -51,9 +51,7 @@ async function handleShopBuy(
 
   try {
     const result = await purchaseItem(player, player.discord_id, date, itemKey);
-    const notice = result.energyRestored
-      ? `You bought ${result.item.entry.emoji} ${result.item.entry.name} for ${String(result.coinsSpent)} coins, and your energy is topped up.`
-      : `You bought ${result.item.entry.emoji} ${result.item.entry.name} for ${String(result.coinsSpent)} coins.`;
+    const notice = `You bought ${result.item.entry.emoji} ${result.item.entry.name} for ${String(result.coinsSpent)} coins${result.energyRestored ? ', and your energy is topped up.' : '.'}`;
 
     const shop = await getShop(result.player, player.discord_id, date);
     await interaction.editReply(buildShopPayload(shop, null, notice));

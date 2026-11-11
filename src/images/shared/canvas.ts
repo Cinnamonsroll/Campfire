@@ -18,6 +18,7 @@ export function loadImageCached(
       throw error;
     });
     imageCache.set(url, promise);
+    setTimeout(() => imageCache.delete(url), 3 * 3600 * 1000);
   }
   return promise;
 }

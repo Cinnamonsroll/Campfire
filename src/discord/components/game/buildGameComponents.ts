@@ -43,12 +43,9 @@ function sectionDisplay(
 ): TextDisplayBuilder[] {
   if (lines.length === 0) return [];
 
-  const displays: TextDisplayBuilder[] = [];
-  displays.push(
-    new TextDisplayBuilder().setContent(
-      `${header}\n${lines.slice(0, MAX_LINES_PER_TEXT_DISPLAY).join("\n")}`,
-    ),
-  );
+  const displays: TextDisplayBuilder[] = [new TextDisplayBuilder().setContent(
+    `${header}\n${lines.slice(0, MAX_LINES_PER_TEXT_DISPLAY).join("\n")}`,
+  )];
   for (let i = MAX_LINES_PER_TEXT_DISPLAY; i < lines.length; i += MAX_LINES_PER_TEXT_DISPLAY) {
     displays.push(
       new TextDisplayBuilder().setContent(

@@ -91,12 +91,7 @@ export function formatUpgradeCost(
   costCoins: number,
   costItems: CampUpgradeCostItem[],
 ): string {
-  const parts = [`${String(costCoins)} Coins`];
-  for (const cost of costItems) {
-    const item = ITEMS[cost.itemKey];
-    parts.push(`${String(cost.quantity)} ${item.name}`);
-  }
-  return parts.join(" + ");
+  return [`${String(costCoins)} Coins`, ...costItems.map(cost => `${String(cost.quantity)} ${ITEMS[cost.itemKey].name}`)].join(" + ");
 }
 
 export async function getCampsite(player: Player): Promise<CampsiteCardData> {

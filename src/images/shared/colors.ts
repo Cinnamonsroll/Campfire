@@ -135,11 +135,15 @@ export async function extractHeaderColor(
       b: clamp(best.b),
     };
     colorCache.set(avatarUrl, result);
+    setTimeout(() => colorCache.delete(avatarUrl), 3 * 3600 * 1000);
+
     return result;
   } catch (error) {
     logger.error(error, "Failed to extract avatar color");
     reportError(error);
     colorCache.set(avatarUrl, FALLBACK);
+    setTimeout(() => colorCache.delete(avatarUrl), 3 * 3600 * 1000);
+
     return FALLBACK;
   }
 }

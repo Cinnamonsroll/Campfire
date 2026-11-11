@@ -119,10 +119,7 @@ export const FISH_POOLS: Record<string, FishPool> = {
 };
 
 export function qualityFromElapsed(elapsedMs: number): FishQuality {
-  for (const timing of FISH_REEL_TIMING) {
-    if (elapsedMs <= timing.maxMs) return timing.quality;
-  }
-  return "poor";
+  return FISH_REEL_TIMING.find(timing => elapsedMs <= timing.maxMs)?.quality ?? "poor";
 }
 
 export function castDelayMs(): number {
