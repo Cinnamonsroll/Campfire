@@ -1,4 +1,5 @@
 export const SCALE = 10;
+export const PROFILE_SCALE = 3;
 
 export const COLORS = {
   body: "#F8F3E8",

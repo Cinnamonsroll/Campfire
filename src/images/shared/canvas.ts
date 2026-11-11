@@ -57,57 +57,25 @@ export function fillRoundRect(
   ctx.fill();
 }
 
-async function loadCachedImage(
-  url: string,
-): Promise<Awaited<ReturnType<typeof loadImage>>> {
-  return loadImageCached(url);
-}
-
-export async function drawAvatar(
+export function drawAvatarBackdrop(
   ctx: SKRSContext2D,
-  url: string,
   centerX: number,
   centerY: number,
   radius: number,
-  fallbackColor: string,
-  initialChar: string,
-): Promise<void> {
-  try {
-    const img = await loadCachedImage(url);
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-    ctx.closePath();
-    ctx.clip();
-    ctx.drawImage(
-      img,
-      centerX - radius,
-      centerY - radius,
-      radius * 2,
-      radius * 2,
-    );
-    ctx.restore();
-  } catch {
-    fillRoundRect(
-      ctx,
-      centerX - radius,
-      centerY - radius,
-      radius * 2,
-      radius * 2,
-      radius,
-      fallbackColor,
-    );
-    ctx.font = font(24 * SCALE, "bold");
-    ctx.fillStyle = COLORS.white;
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText(initialChar, centerX, centerY);
-  }
+): void {
+  // Cast the shadow from the backing circle, behind the image and border.
+  ctx.save();
+  ctx.shadowColor = withAlpha(COLORS.black, 0.14);
+  ctx.shadowBlur = 3 * SCALE * Math.abs(ctx.getTransform().a);
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 1.5 * SCALE * Math.abs(ctx.getTransform().a);
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, radius + 1.25 * SCALE, 0, Math.PI * 2);
+  ctx.fillStyle = COLORS.white;
+  ctx.fill();
+  ctx.restore();
 
   ctx.save();
-  ctx.shadowColor = withAlpha(COLORS.black, 0.1);
-  ctx.shadowBlur = 0;
-  ctx.shadowOffsetY = 4 * SCALE;
   ctx.beginPath();
   ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
   ctx.strokeStyle = COLORS.white;
@@ -126,7 +94,7 @@ export function drawStatBg(
   ctx.save();
   ctx.shadowColor = withAlpha(COLORS.black, 0.06);
   ctx.shadowBlur = 0;
-  ctx.shadowOffsetY = 3 * SCALE;
+  ctx.shadowOffsetY = 3 * SCALE * Math.abs(ctx.getTransform().a);
   fillRoundRect(ctx, x, y, width, height, 10 * SCALE, COLORS.cards);
   ctx.restore();
 }
@@ -213,7 +181,7 @@ export async function drawInventorySlot(
   ctx.save();
   ctx.shadowColor = withAlpha(COLORS.black, 0.06);
   ctx.shadowBlur = 0;
-  ctx.shadowOffsetY = 2 * SCALE;
+  ctx.shadowOffsetY = 2 * SCALE * Math.abs(ctx.getTransform().a);
   fillRoundRect(ctx, x, y, width, height, 8 * SCALE, cardColor);
   ctx.restore();
 

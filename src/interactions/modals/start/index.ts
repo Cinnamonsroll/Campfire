@@ -7,6 +7,7 @@ import {
   campfireEmbed,
   welcomeCeremony,
 } from "../../../embeds/index.js";
+import { resolveProfileAppearance } from "../../../discord/profileAppearance.js";
 import { generateCamperCard } from "../../../images/index.js";
 import {
   findByDiscordId,
@@ -57,34 +58,39 @@ async function handleNameSubmit(
       );
     }
 
-    const avatarUrl = interaction.user.displayAvatarURL({
-      extension: "png",
-      size: 512,
-      forceStatic: true,
-    });
-
+    const { assets, staticAvatarUrl, user } = await resolveProfileAppearance(
+      interaction,
+      interaction.user,
+    );
     const startingItems = STARTING_ITEM_KEYS.map((k) => ITEMS[k]);
 
-    const cardBuffer = await generateCamperCard({
-      avatarUrl,
-      characterName: name,
-      title: getTitle(player.level),
-      coins: player.coins,
-      level: player.level,
-      xp: 0,
-      xpRequired: xpToNextLevel(player.level),
-      inventory: startingItems.map((item) => ({
-        emoji: item.emoji,
-        quantity: 1,
-      })),
-      accentColor: interaction.user.accentColor ?? null,
-    });
-    const file = { attachment: cardBuffer, name: "camper_card.webp" };
+    const card = await generateCamperCard(
+      {
+        avatarUrl: staticAvatarUrl,
+        characterName: name,
+        title: getTitle(player.level),
+        coins: player.coins,
+        level: player.level,
+        xp: 0,
+        xpRequired: xpToNextLevel(player.level),
+        inventory: startingItems.map((item) => ({
+          emoji: item.emoji,
+          quantity: 1,
+        })),
+        accentColor: user.accentColor ?? null,
+      },
+      assets,
+      Math.min(interaction.attachmentSizeLimit, 8 * 1024 * 1024),
+    );
+    const filename = `camper_card.${card.extension}`;
+    const file = { attachment: card.buffer, name: filename };
 
     const embed = welcomeCeremony(name, startingItems).setImage(
-      "attachment://camper_card.webp",
+      `attachment://${filename}`,
     );
 
+    if (card.notes.length)
+      embed.setFooter({ text: card.notes.join(" · ").slice(0, 2048) });
     await interaction.editReply({ embeds: [embed], files: [file] });
 
     if (interaction.message) {

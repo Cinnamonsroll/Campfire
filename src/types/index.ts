@@ -1,5 +1,6 @@
 import type {
   SlashCommandBuilder,
+  SlashCommandOptionsOnlyBuilder,
   SlashCommandSubcommandsOnlyBuilder,
   ButtonInteraction,
   ModalSubmitInteraction,
@@ -17,6 +18,7 @@ export interface PermissionCheck {
 export interface Command {
   data:
     | SlashCommandBuilder
+    | SlashCommandOptionsOnlyBuilder
     | SlashCommandSubcommandsOnlyBuilder
     | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">;
   execute: (ctx: CommandContext) => Promise<void>;

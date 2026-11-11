@@ -1,12 +1,11 @@
-import { SKRSContext2D, createCanvas } from "@napi-rs/canvas";
+import { SKRSContext2D, createCanvas, type Canvas } from "@napi-rs/canvas";
 import {
   fillRoundRect,
   drawProgressBar,
-  drawAvatar,
-  loadImageCached,
+  drawAvatarBackdrop,
 } from "../shared/canvas.js";
 import { drawEmoji, prefetchEmojis } from "../shared/emoji.js";
-import { SCALE, withAlpha, COLORS } from "../shared/layout.js";
+import { SCALE, PROFILE_SCALE, withAlpha, COLORS } from "../shared/layout.js";
 import { font } from "../shared/typography.js";
 import { StatisticCardData, StatisticsCardData } from "../types/index.js";
 
@@ -47,7 +46,7 @@ function drawTileBackground(ctx: SKRSContext2D, x: number, y: number): void {
   ctx.save();
   ctx.shadowColor = withAlpha(COLORS.black, 0.06);
   ctx.shadowBlur = 0;
-  ctx.shadowOffsetY = 3 * SCALE;
+  ctx.shadowOffsetY = 3 * SCALE * Math.abs(ctx.getTransform().a);
   fillRoundRect(ctx, x, y, TILE_WIDTH, TILE_HEIGHT, 12 * SCALE, COLORS.card);
   ctx.restore();
 }
@@ -99,9 +98,22 @@ async function drawStatisticTile(
   }
 }
 
-export async function generateStatisticsCard(
+export function statisticsAvatarPlacement(): {
+  x: number;
+  y: number;
+  size: number;
+} {
+  return {
+    x: PADDING / SCALE + 6,
+    y: (PADDING + HEADER_HEIGHT / 2) / SCALE - 30,
+    size: 60,
+  };
+}
+
+export async function renderStatisticsCardCanvas(
   data: StatisticsCardData,
-): Promise<Buffer> {
+  outputScale = PROFILE_SCALE,
+): Promise<Canvas> {
   await Promise.all([
     prefetchEmojis(
       data.statistics
@@ -109,13 +121,15 @@ export async function generateStatisticsCard(
         .map((statistic) => statistic.emoji),
       22 * SCALE,
     ),
-    loadImageCached(data.avatarUrl),
   ]);
 
-  const canvas = createCanvas(CARD_WIDTH, CARD_HEIGHT);
+  const canvas = createCanvas(
+    Math.round((CARD_WIDTH * outputScale) / SCALE),
+    Math.round((CARD_HEIGHT * outputScale) / SCALE),
+  );
   const ctx = canvas.getContext("2d");
-  ctx.imageSmoothingEnabled = true;
-  ctx.imageSmoothingQuality = "high";
+  ctx.scale(outputScale / SCALE, outputScale / SCALE);
+  ctx.imageSmoothingEnabled = false;
 
   fillRoundRect(
     ctx,
@@ -127,14 +141,11 @@ export async function generateStatisticsCard(
     COLORS.campBody,
   );
 
-  await drawAvatar(
+  drawAvatarBackdrop(
     ctx,
-    data.avatarUrl,
     PADDING + 36 * SCALE,
     PADDING + HEADER_HEIGHT / 2,
     30 * SCALE,
-    COLORS.campAccent,
-    data.characterName.charAt(0).toUpperCase(),
   );
 
   ctx.textAlign = "left";
@@ -171,5 +182,5 @@ export async function generateStatisticsCard(
     CARD_HEIGHT - FOOTER_HEIGHT + 12 * SCALE,
   );
 
-  return Buffer.from(await canvas.encode("png"));
+  return canvas;
 }

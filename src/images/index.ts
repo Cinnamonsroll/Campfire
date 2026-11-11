@@ -1,9 +1,13 @@
 import { performance } from "node:perf_hooks";
 import { vanta } from "../utils/vanta.js";
-import { generateCamperCard as renderCamperCard } from "./profile/generateProfileCard.js";
+import {
+  generateCamperCard as renderCamperCard,
+  generateStatisticsCard as renderStatisticsCard,
+  type ProfileAssets,
+  type ProfileCard,
+} from "./profile/renderProfileCards.js";
 import { generateCampsiteCard as renderCampsiteCard } from "./campsite/generateCampsiteCard.js";
 import { generateShopCard as renderShopCard } from "./shop/generateShopCard.js";
-import { generateStatisticsCard as renderStatisticsCard } from "./statistics/generateStatisticsCard.js";
 import type {
   CardData,
   CampsiteCardData,
@@ -28,8 +32,12 @@ async function measureLatency<T>(
   }
 }
 
-export const generateCamperCard = (data: CardData): Promise<Buffer> =>
-  measureLatency("profile", () => renderCamperCard(data));
+export const generateCamperCard = (
+  data: CardData,
+  assets?: ProfileAssets,
+  maxBytes?: number,
+): Promise<ProfileCard> =>
+  measureLatency("profile", () => renderCamperCard(data, assets, maxBytes));
 
 export const generateCampsiteCard = (data: CampsiteCardData): Promise<Buffer> =>
   measureLatency("campsite", () => renderCampsiteCard(data));
@@ -39,8 +47,12 @@ export const generateShopCard = (data: ShopCardData): Promise<Buffer> =>
 
 export const generateStatisticsCard = (
   data: StatisticsCardData,
-): Promise<Buffer> =>
-  measureLatency("statistics", () => renderStatisticsCard(data));
+  assets?: ProfileAssets,
+  maxBytes?: number,
+): Promise<ProfileCard> =>
+  measureLatency("statistics", () =>
+    renderStatisticsCard(data, assets, maxBytes),
+  );
 
 export type {
   CardData,
@@ -54,3 +66,5 @@ export type {
   StatisticCardData,
   StatisticsCardData,
 } from "./types/index.js";
+
+export type { ProfileAssets, ProfileCard };

@@ -1,9 +1,9 @@
-import { createCanvas } from "@napi-rs/canvas";
+import { createCanvas, type Canvas } from "@napi-rs/canvas";
 import type { CardData } from "../types/index.js";
-import { darken, extractHeaderColor, rgbString } from "../shared/colors.js";
+import { extractHeaderColor, rgbString } from "../shared/colors.js";
 import {
   roundRect,
-  drawAvatar,
+  drawAvatarBackdrop,
   drawStatBg,
   drawStatValue,
   drawProgressBar,
@@ -11,10 +11,9 @@ import {
   drawRemainingXP,
   drawInventorySlot,
   drawEmptySlot,
-  loadImageCached,
 } from "../shared/canvas.js";
 import { prefetchEmojis } from "../shared/emoji.js";
-import { SCALE, COLORS, withAlpha } from "../shared/layout.js";
+import { SCALE, PROFILE_SCALE, COLORS, withAlpha } from "../shared/layout.js";
 import { font } from "../shared/typography.js";
 
 const CARD_WIDTH = 640 * SCALE;
@@ -95,7 +94,23 @@ function computeLayout(): LayoutMetrics {
   };
 }
 
-export async function generateCamperCard(data: CardData): Promise<Buffer> {
+export function profileAvatarPlacement(): {
+  x: number;
+  y: number;
+  size: number;
+} {
+  const layout = computeLayout();
+  return {
+    x: (LEFT_PANEL_WIDTH / 2 - layout.avatarRadius) / SCALE,
+    y: (layout.avatarCenterY - layout.avatarRadius) / SCALE,
+    size: (layout.avatarRadius * 2) / SCALE,
+  };
+}
+
+export async function renderCamperCardCanvas(
+  data: CardData,
+  outputScale = PROFILE_SCALE,
+): Promise<Canvas> {
   const layout = computeLayout();
   const [headerColor] = await Promise.all([
     extractHeaderColor(data.avatarUrl, data.accentColor),
@@ -103,12 +118,16 @@ export async function generateCamperCard(data: CardData): Promise<Buffer> {
       data.inventory.map((item) => item.emoji),
       20 * SCALE,
     ),
-    loadImageCached(data.avatarUrl),
   ]);
   const headerColorString = rgbString(headerColor);
 
-  const canvas = createCanvas(CARD_WIDTH, layout.cardHeight);
+  const canvas = createCanvas(
+    Math.round((CARD_WIDTH * outputScale) / SCALE),
+    Math.round((layout.cardHeight * outputScale) / SCALE),
+  );
   const ctx = canvas.getContext("2d");
+  ctx.scale(outputScale / SCALE, outputScale / SCALE);
+  ctx.imageSmoothingEnabled = false;
 
   roundRect(ctx, 0, 0, CARD_WIDTH, layout.cardHeight, 14 * SCALE);
   ctx.clip();
@@ -116,30 +135,11 @@ export async function generateCamperCard(data: CardData): Promise<Buffer> {
   ctx.fillStyle = COLORS.body;
   ctx.fillRect(0, 0, CARD_WIDTH, layout.cardHeight);
 
-  const headerGradient = ctx.createLinearGradient(0, 0, 0, layout.headerHeight);
-  headerGradient.addColorStop(0, headerColorString);
-  headerGradient.addColorStop(0.4, rgbString(darken(headerColor, 0.93)));
-  headerGradient.addColorStop(0.75, rgbString(darken(headerColor, 0.85)));
-  headerGradient.addColorStop(1, rgbString(darken(headerColor, 0.78)));
-  ctx.fillStyle = headerGradient;
+  // Apply the same frosted tint throughout, including the edge at the avatar.
+  ctx.fillStyle = headerColorString;
   ctx.fillRect(0, 0, LEFT_PANEL_WIDTH, layout.headerHeight);
-
-  const seamBlend = ctx.createLinearGradient(
-    0,
-    layout.headerHeight - 10 * SCALE,
-    0,
-    layout.headerHeight + 16 * SCALE,
-  );
-  seamBlend.addColorStop(0, withAlpha(COLORS.black, 0.06));
-  seamBlend.addColorStop(0.6, withAlpha(COLORS.black, 0.015));
-  seamBlend.addColorStop(1, withAlpha(COLORS.black, 0));
-  ctx.fillStyle = seamBlend;
-  ctx.fillRect(
-    0,
-    layout.headerHeight - 10 * SCALE,
-    LEFT_PANEL_WIDTH,
-    26 * SCALE,
-  );
+  ctx.fillStyle = withAlpha(COLORS.white, 0.12);
+  ctx.fillRect(0, 0, LEFT_PANEL_WIDTH, layout.headerHeight);
 
   const panelDividerShadow = ctx.createLinearGradient(
     LEFT_PANEL_WIDTH,
@@ -153,14 +153,11 @@ export async function generateCamperCard(data: CardData): Promise<Buffer> {
   ctx.fillRect(LEFT_PANEL_WIDTH, 0, 3 * SCALE, layout.cardHeight);
 
   const leftCenterX = LEFT_PANEL_WIDTH / 2;
-  await drawAvatar(
+  drawAvatarBackdrop(
     ctx,
-    data.avatarUrl,
     leftCenterX,
     layout.avatarCenterY,
     layout.avatarRadius,
-    headerColorString,
-    data.characterName.charAt(0).toUpperCase(),
   );
 
   ctx.font = font(16 * SCALE, "bold");
@@ -295,5 +292,5 @@ export async function generateCamperCard(data: CardData): Promise<Buffer> {
     }
   }
 
-  return Buffer.from(await canvas.encode("png"));
+  return canvas;
 }
